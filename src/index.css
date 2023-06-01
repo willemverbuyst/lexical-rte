@@ -37,10 +37,13 @@ body {
 }
 
 .editor-input {
-  width: 400px;
+  width: 600px;
   height: 300px;
-  border: 1px solid #575757;
+  border: 2px solid #aaa;
   padding: 0 0.5rem;
+  border-bottom: none;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 .editor-input__placeholder {
@@ -48,4 +51,23 @@ body {
   top: 1rem;
   left: 0.5rem;
   color: #575757;
+}
+
+.tree-view-output {
+  background-color: var(--color-lightest);
+  padding: 0.5rem;
+  border: 2px solid #aaa;
+  border-top: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.debug-timetravel-button,
+.debug-tree-button {
+  margin: 0 0.5rem;
+  background-color: #f1f1f1;
+  border: 2px solid #aaa;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
 }
