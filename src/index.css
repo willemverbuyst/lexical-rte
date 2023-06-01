@@ -1,0 +1,51 @@
+:root {
+  font-family: "Karla", sans-serif;
+  background-color: #f1f1f1;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --color-darkest: #0002f5;
+  --color-dark: #0045ff;
+  --color-medium: #0c81e8;
+  --color-light: #00cbff;
+  --color-lightest: #00f5e5;
+}
+
+body {
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0;
+  background: #eee;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular",
+    sans-serif;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.editor-wrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.editor-container {
+  text-align: left;
+  position: relative;
+}
+
+.editor-input {
+  width: 400px;
+  height: 300px;
+  border: 1px solid #575757;
+  padding: 0 0.5rem;
+}
+
+.editor-input__placeholder {
+  position: absolute;
+  top: 1rem;
+  left: 0.5rem;
+  color: #575757;
+}

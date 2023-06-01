@@ -31,15 +31,19 @@ function PlaintTextEditor() {
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <PlainTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div>Enter some text...</div>}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-      <OnChangePlugin onChange={onChange} />
-      <HistoryPlugin />
-    </LexicalComposer>
+    <div className="editor-container">
+      <LexicalComposer initialConfig={initialConfig}>
+        <PlainTextPlugin
+          contentEditable={<ContentEditable className="editor-input" />}
+          placeholder={
+            <div className="editor-input__placeholder">Enter some text...</div>
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <OnChangePlugin onChange={onChange} />
+        <HistoryPlugin />
+      </LexicalComposer>
+    </div>
   );
 }
 
