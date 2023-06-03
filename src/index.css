@@ -39,11 +39,12 @@ body {
 .editor-input {
   width: 600px;
   height: 300px;
-  border: 2px solid #aaa;
   padding: 0 0.5rem;
+  border: 2px solid #aaa;
   border-bottom: none;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+  outline: none;
 }
 
 .editor-input__placeholder {
