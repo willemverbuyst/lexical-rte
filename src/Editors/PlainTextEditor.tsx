@@ -6,6 +6,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
+import AutoFocusPlugin from "./AutoFocusPlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 
 const theme = {};
@@ -41,6 +42,7 @@ function PlaintTextEditor() {
           }
           ErrorBoundary={LexicalErrorBoundary}
         />
+        <AutoFocusPlugin />
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
         <TreeViewPlugin />
