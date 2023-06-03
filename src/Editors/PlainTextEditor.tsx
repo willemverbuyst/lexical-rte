@@ -6,6 +6,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
+import DateTime from "../Components/DateTime";
 import AutoFocusPlugin from "./AutoFocusPlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 
@@ -34,6 +35,7 @@ function PlaintTextEditor() {
 
   return (
     <div className="editor-container">
+      <DateTime handleClick={() => console.log("click")} />
       <LexicalComposer initialConfig={initialConfig}>
         <PlainTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
