@@ -1,12 +1,28 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { useEffect } from "react";
+import { $getSelection, $insertNodes, TextNode } from "lexical";
+import DateTime from "../Components/DateTime";
+import { DateTimeNode } from "./DateTimeNode";
 
-export default function DateTimePlugin() {
+interface Props {
+  date: Date;
+}
+
+export default function DateTimePlugin({ date = new Date() }: Props) {
   const [editor] = useLexicalComposerContext();
 
-  useEffect(() => {
-    editor.focus();
-  }, [editor]);
+  const handleClick = () => {
+    editor.update(() => {
+      const node = new DateTimeNode(date.toLocaleString());
+      const nodes = [node, new TextNode(" ")];
 
-  return null;
+      const selection = $getSelection();
+      if (selection?.getTextContent()) {
+        selection.insertNodes(nodes);
+      } else {
+        $insertNodes(nodes);
+      }
+    });
+  };
+
+  return <DateTime date={date} handleClick={handleClick} />;
 }

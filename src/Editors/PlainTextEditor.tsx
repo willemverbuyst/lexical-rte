@@ -6,24 +6,25 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
-import DateTime from "../Components/DateTime";
 import AutoFocusPlugin from "./AutoFocusPlugin";
+import { DateTimeNode } from "./DateTimeNode";
+import DateTimePlugin from "./DateTimePlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 
 const theme = {};
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
-    // Read the contents of the EditorState here.
     const root = $getRoot();
     const selection = $getSelection();
 
+    // eslint-disable-next-line no-console
     console.log(root, selection);
   });
 }
 
 function onError(error: Error) {
-  console.error(error);
+  throw new Error(error.message);
 }
 
 function PlaintTextEditor() {
@@ -31,12 +32,13 @@ function PlaintTextEditor() {
     namespace: "MyEditor",
     theme,
     onError,
+    nodes: [DateTimeNode],
   };
 
   return (
     <div className="editor-container">
-      <DateTime handleClick={() => console.log("click")} />
       <LexicalComposer initialConfig={initialConfig}>
+        <DateTimePlugin date={new Date()} />
         <PlainTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
           placeholder={

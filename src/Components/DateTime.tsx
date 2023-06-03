@@ -1,8 +1,9 @@
 interface Props {
+  date: Date;
   handleClick: () => void;
 }
 
-export default function DateTime({ handleClick }: Props) {
+export default function DateTime({ date, handleClick }: Props) {
   return (
     <div className="date-time">
       <button
@@ -12,7 +13,7 @@ export default function DateTime({ handleClick }: Props) {
         onClick={handleClick}
       >
         <i className="fa fa-clock-o date-time__icon" />
-        {new Date().toLocaleString()}
+        {date.toLocaleString()}
       </button>
     </div>
   );
