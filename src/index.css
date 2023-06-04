@@ -25,6 +25,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  margin: 0.2rem 0.2rem;
+  background-color: #f1f1f1;
+  border: 2px solid #aaa;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 .editor-wrapper {
   width: 100vw;
   display: flex;
@@ -34,6 +46,13 @@ body {
 .editor-container {
   text-align: left;
   position: relative;
+}
+
+.editor-buttons {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .editor-input {
@@ -49,7 +68,7 @@ body {
 
 .editor-input__placeholder {
   position: absolute;
-  top: 5.2rem;
+  top: 3.2rem;
   left: 0.5rem;
   color: #575757;
 }
@@ -73,43 +92,14 @@ body {
   cursor: pointer;
 }
 
-.date-time {
-  width: 600px;
-  font-size: 1rem;
-  background: #eee;
-  font-family: monospace;
-  color: black;
-}
-
-.date-time button {
-  margin: 0.2rem 0;
-  background-color: #f1f1f1;
-  border: 2px solid #aaa;
-  border-radius: 0.5rem;
-  padding: 0.2rem 0.5rem;
-}
-
-.date-time button:hover {
-  cursor: pointer;
-}
-
 .date-time__icon {
   font-size: 1rem;
   margin-right: 0.5rem;
 }
 
-.date-time__icon:hover {
-  cursor: pointer;
-}
-
-.highlight button {
-  margin: 0.2rem 0;
-  background-color: #f1f1f1;
-  border: 2px solid #aaa;
-  border-radius: 0.5rem;
-  padding: 0.2rem 0.5rem;
-}
-
-.highlight button:hover {
-  cursor: pointer;
+.highlight__dot {
+  height: 0.8rem;
+  width: 0.8rem;
+  border-radius: 50%;
+  display: inline-block;
 }

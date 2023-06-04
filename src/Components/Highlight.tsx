@@ -4,6 +4,7 @@ interface Props {
 }
 
 export default function Highlight({ color, handleClick }: Props) {
+  console.log("color :>> ", color);
   return (
     <div className="highlight">
       <button
@@ -12,7 +13,8 @@ export default function Highlight({ color, handleClick }: Props) {
         title="highlight selection"
         onClick={handleClick}
       >
-        highlight {color}
+        highlight &nbsp;
+        <span className="highlight__dot" style={{ backgroundColor: color }} />
       </button>
     </div>
   );
