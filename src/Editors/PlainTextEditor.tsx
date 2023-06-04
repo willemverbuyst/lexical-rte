@@ -9,6 +9,7 @@ import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
 import AutoFocusPlugin from "./AutoFocusPlugin";
 import { DateTimeNode } from "./DateTimeNode";
 import DateTimePlugin from "./DateTimePlugin";
+import HighlightPlugin from "./HighlightPlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 
 const theme = {};
@@ -39,6 +40,7 @@ function PlaintTextEditor() {
     <div className="editor-container">
       <LexicalComposer initialConfig={initialConfig}>
         <DateTimePlugin date={new Date()} />
+        <HighlightPlugin color="yellow" />
         <PlainTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
           placeholder={
