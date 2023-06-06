@@ -4,7 +4,6 @@ interface Props {
 }
 
 export default function Highlight({ color, handleClick }: Props) {
-  console.log("color :>> ", color);
   return (
     <div className="highlight">
       <button
@@ -12,9 +11,9 @@ export default function Highlight({ color, handleClick }: Props) {
         aria-label="highlight selection"
         title="highlight selection"
         onClick={handleClick}
+        style={{ backgroundColor: color }}
       >
-        highlight &nbsp;
-        <span className="highlight__dot" style={{ backgroundColor: color }} />
+        highlight
       </button>
     </div>
   );

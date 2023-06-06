@@ -30,7 +30,7 @@ function onError(error: Error) {
 
 function PlaintTextEditor() {
   const initialConfig = {
-    namespace: "MyEditor",
+    namespace: "PlainEditorTest",
     theme,
     onError,
     nodes: [DateTimeNode],
@@ -42,7 +42,6 @@ function PlaintTextEditor() {
         <div className="editor-buttons">
           <DateTimePlugin date={new Date()} />
           <HighlightPlugin color="#f8ff00" />
-          <HighlightPlugin color="#10ff00" />
         </div>
         <PlainTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}

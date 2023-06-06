@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $patchStyleText } from "@lexical/selection";
 import { $getSelection, $isRangeSelection } from "lexical";
-import { useCallback } from "react";
+import { useState } from "react";
 import Highlight from "../Components/Highlight";
 
 interface Props {
@@ -10,23 +10,21 @@ interface Props {
 
 export default function HighlightPlugin({ color }: Props) {
   const [editor] = useLexicalComposerContext();
+  const [active, setActive] = useState(false);
 
-  const handleClick = useCallback(
-    (styles: Record<string, string>) => {
-      editor.update(() => {
-        const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
-          $patchStyleText(selection, styles);
-        }
-      });
-    },
-    [editor]
-  );
+  const handleClick = () => {
+    const newActiveState = !active;
+    setActive(newActiveState);
 
-  return (
-    <Highlight
-      color={color}
-      handleClick={() => handleClick({ "background-color": color })}
-    />
-  );
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        $patchStyleText(selection, {
+          "background-color": newActiveState ? color : "none",
+        });
+      }
+    });
+  };
+
+  return <Highlight color={active ? color : ""} handleClick={handleClick} />;
 }
