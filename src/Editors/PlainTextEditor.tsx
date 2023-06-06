@@ -9,6 +9,7 @@ import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
 import AutoFocusPlugin from "./AutoFocusPlugin";
 import { DateTimeNode } from "./DateTimeNode";
 import DateTimePlugin from "./DateTimePlugin";
+import ExportPlugin from "./ExportPlugin";
 import HighlightPlugin from "./HighlightPlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 
@@ -20,7 +21,7 @@ function onChange(editorState: EditorState) {
     const selection = $getSelection();
 
     // eslint-disable-next-line no-console
-    console.log(root, selection);
+    // console.log(root, selection);
   });
 }
 
@@ -42,6 +43,7 @@ function PlaintTextEditor() {
         <div className="editor-buttons">
           <DateTimePlugin date={new Date()} />
           <HighlightPlugin color="#f8ff00" />
+          <ExportPlugin />
         </div>
         <PlainTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
