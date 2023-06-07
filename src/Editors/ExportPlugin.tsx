@@ -5,7 +5,7 @@ import printJS from "print-js";
 import Html from "react-pdf-html";
 import Export from "../Components/Export";
 
-function CreateDocument({ html }: { html: string | null }) {
+function CreateDocument({ html }: { html: string }) {
   return (
     <Document>
       <Page>
@@ -17,9 +17,9 @@ function CreateDocument({ html }: { html: string | null }) {
 
 export default function ExportPlugin() {
   const [editor] = useLexicalComposerContext();
-  let html = "<p>testing</p>";
 
   const handleClick = () => {
+    let html = "<p>nothing to print</p>";
     editor.update(() => {
       html = $generateHtmlFromNodes(editor, null);
     });
