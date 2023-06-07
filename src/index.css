@@ -27,13 +27,15 @@ body {
 
 button {
   margin: 0.2rem 0.2rem;
-  background-color: #f1f1f1;
-  border: 2px solid #aaa;
+  background-color: var(--color-darkest);
+  color: #fff;
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
+  font-size: 1rem;
 }
 
 button:hover {
+  transform: scale(1, 1.1);
   cursor: pointer;
 }
 
