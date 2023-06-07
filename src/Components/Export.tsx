@@ -4,11 +4,11 @@ interface Props {
 
 export default function Export({ handleClick }: Props) {
   return (
-    <div className="highlight">
+    <div className="export">
       <button
         type="button"
-        aria-label="highlight selection"
-        title="highlight selection"
+        aria-label="export file"
+        title="export file"
         onClick={handleClick}
       >
         export
