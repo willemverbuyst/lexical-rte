@@ -24,5 +24,5 @@ export default function DateTimePlugin({ date = new Date() }: Props) {
     });
   };
 
-  return <DateTime date={date} handleClick={handleClick} />;
+  return <DateTime handleClick={handleClick} />;
 }

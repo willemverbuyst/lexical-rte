@@ -3,7 +3,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { Document, Page, pdf } from "@react-pdf/renderer";
 import printJS from "print-js";
 import Html from "react-pdf-html";
-import Export from "../Components/Export";
+import Print from "../Components/Print";
 
 function CreateDocument({ html }: { html: string }) {
   return (
@@ -15,7 +15,7 @@ function CreateDocument({ html }: { html: string }) {
   );
 }
 
-export default function ExportPlugin() {
+export default function PrintPlugin() {
   const [editor] = useLexicalComposerContext();
 
   const handleClick = () => {
@@ -35,5 +35,5 @@ export default function ExportPlugin() {
       });
   };
 
-  return <Export handleClick={handleClick} />;
+  return <Print handleClick={handleClick} />;
 }

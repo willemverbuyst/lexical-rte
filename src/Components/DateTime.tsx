@@ -1,19 +1,17 @@
 interface Props {
-  date: Date;
   handleClick: () => void;
 }
 
-export default function DateTime({ date, handleClick }: Props) {
+export default function DateTime({ handleClick }: Props) {
   return (
-    <div className="date-time">
+    <div className="toolbar-item">
       <button
         type="button"
         aria-label="insert date and time"
         title="insert date and time"
         onClick={handleClick}
       >
-        <i className="fa fa-clock-o date-time__icon" />
-        {date.toLocaleString()}
+        <span className="icon clock-button" />
       </button>
     </div>
   );

@@ -26,5 +26,5 @@ export default function HighlightPlugin({ color }: Props) {
     });
   };
 
-  return <Highlight color={active ? color : ""} handleClick={handleClick} />;
+  return <Highlight handleClick={handleClick} />;
 }

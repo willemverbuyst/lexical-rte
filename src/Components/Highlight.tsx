@@ -1,19 +1,17 @@
 interface Props {
-  color: string;
   handleClick: () => void;
 }
 
-export default function Highlight({ color, handleClick }: Props) {
+export default function Highlight({ handleClick }: Props) {
   return (
-    <div className="highlight">
+    <div className="toolbar-item">
       <button
         type="button"
         aria-label="highlight selection"
         title="highlight selection"
         onClick={handleClick}
-        style={{ backgroundColor: color }}
       >
-        highlight
+        <span className="icon highlight-button" />
       </button>
     </div>
   );
