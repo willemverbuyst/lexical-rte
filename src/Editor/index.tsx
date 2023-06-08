@@ -42,8 +42,8 @@ function Editor() {
     <div className="editor-container">
       <LexicalComposer initialConfig={initialConfig}>
         <div className="toolbar">
-          <DateTimePlugin date={new Date()} />
-          <HighlightPlugin color="#f8ff00" />
+          <DateTimePlugin />
+          <HighlightPlugin />
           <PrintPlugin />
         </div>
         <RichTextPlugin

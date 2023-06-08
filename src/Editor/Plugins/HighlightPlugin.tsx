@@ -2,13 +2,13 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $patchStyleText } from "@lexical/selection";
 import { $getSelection, $isRangeSelection } from "lexical";
 import { useState } from "react";
-import Highlight from "../Editor/Components/Highlight";
+import Highlight from "../Components/Highlight";
 
 interface Props {
-  color: string;
+  color?: string;
 }
 
-export default function HighlightPlugin({ color }: Props) {
+export default function HighlightPlugin({ color = "#f8ff00" }: Props) {
   const [editor] = useLexicalComposerContext();
   const [active, setActive] = useState(false);
 
