@@ -5,13 +5,14 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
-import AutoFocusPlugin from "./AutoFocusPlugin";
-import { DateTimeNode } from "./DateTimeNode";
-import DateTimePlugin from "./DateTimePlugin";
-import HighlightPlugin from "./HighlightPlugin";
-import PrintPlugin from "./PrintPlugin";
-import TreeViewPlugin from "./TreeViewPlugin";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import Placeholder from "./Components/Placeholder";
+import { DateTimeNode } from "./Nodes/DateTimeNode";
+import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
+import DateTimePlugin from "./Plugins/DateTimePlugin";
+import HighlightPlugin from "./Plugins/HighlightPlugin";
+import PrintPlugin from "./Plugins/PrintPlugin";
+import TreeViewPlugin from "./Plugins/TreeViewPlugin";
 
 const theme = {};
 
@@ -29,7 +30,7 @@ function onError(error: Error) {
   throw new Error(error.message);
 }
 
-function PlaintTextEditor() {
+function Editor() {
   const initialConfig = {
     namespace: "PlainEditorTest",
     theme,
@@ -45,11 +46,9 @@ function PlaintTextEditor() {
           <HighlightPlugin color="#f8ff00" />
           <PrintPlugin />
         </div>
-        <PlainTextPlugin
+        <RichTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
-          placeholder={
-            <div className="editor-input__placeholder">Enter some text...</div>
-          }
+          placeholder={<Placeholder />}
           ErrorBoundary={LexicalErrorBoundary}
         />
         <AutoFocusPlugin />
@@ -61,4 +60,4 @@ function PlaintTextEditor() {
   );
 }
 
-export default PlaintTextEditor;
+export default Editor;

@@ -1,11 +1,11 @@
-import PlaintTextEditor from "./Editors/PlainTextEditor";
+import Editor from "./Editor";
 
 function App() {
   return (
     <div>
       <h1>Lexical</h1>
       <div className="editor-wrapper">
-        <PlaintTextEditor />
+        <Editor />
       </div>
     </div>
   );

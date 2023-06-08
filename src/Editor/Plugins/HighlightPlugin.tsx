@@ -2,7 +2,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $patchStyleText } from "@lexical/selection";
 import { $getSelection, $isRangeSelection } from "lexical";
 import { useState } from "react";
-import Highlight from "../Components/Highlight";
+import Highlight from "../Editor/Components/Highlight";
 
 interface Props {
   color: string;

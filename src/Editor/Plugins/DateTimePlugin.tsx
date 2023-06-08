@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $insertNodes, TextNode } from "lexical";
-import DateTime from "../Components/DateTime";
-import { DateTimeNode } from "./DateTimeNode";
+import DateTime from "../Editor/Components/DateTime";
+import { DateTimeNode } from "../Editor/Nodes/DateTimeNode";
 
 interface Props {
   date: Date;
