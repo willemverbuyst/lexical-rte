@@ -4,7 +4,7 @@ interface Props {
 
 export default function Highlight({ handleClick }: Props) {
   return (
-    <div className="toolbar-item">
+    <div className="sidebar-item">
       <button
         type="button"
         aria-label="highlight selection"

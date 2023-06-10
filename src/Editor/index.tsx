@@ -38,6 +38,12 @@ function Editor() {
           <PrintPlugin />
           <Debug handleClick={setShowDebugPanel} show={showDebugPanel} />
         </div>
+        <div className="sidebar">
+          <DateTimePlugin />
+          <HighlightPlugin />
+          <PrintPlugin />
+          <Debug handleClick={setShowDebugPanel} show={showDebugPanel} />
+        </div>
         <RichTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
           placeholder={<Placeholder />}

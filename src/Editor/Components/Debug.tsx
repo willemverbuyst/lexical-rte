@@ -5,7 +5,7 @@ interface Props {
 
 export default function Debug({ handleClick, show }: Props) {
   return (
-    <div className="toolbar-item">
+    <div className="sidebar-item">
       <button
         type="button"
         aria-label="debug editor"

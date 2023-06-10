@@ -86,6 +86,12 @@ button:active {
 .editor-container {
   text-align: left;
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr 5rem;
+  grid-template-rows: 5rem 1fr;
+  grid-template-areas:
+    "toolbar toolbar"
+    "editor sidebar";
 }
 
 .editor-input {
@@ -97,6 +103,7 @@ button:active {
   box-shadow: inset 4px 4px 4px var(--bg-color-dark),
     inset -4px -4px 4px var(--bg-color-light);
   outline: none;
+  grid-area: editor;
 }
 
 .placeholder {
@@ -126,10 +133,29 @@ button:active {
   margin-bottom: 1px;
   padding: 4px;
   vertical-align: middle;
-  justify-content: center;
+  justify-content: start;
+  grid-area: toolbar;
 }
 
 .toolbar .toolbar-item .icon {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  user-select: none;
+  background-size: contain;
+  justify-content: center;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+.sidebar .sidebar-item .icon {
   display: flex;
   width: 2rem;
   height: 2rem;
