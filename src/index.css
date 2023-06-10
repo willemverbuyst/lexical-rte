@@ -108,7 +108,7 @@ button:active {
 
 .placeholder {
   position: absolute;
-  top: 5.2rem;
+  top: 6rem;
   left: 1rem;
   color: var(--txt-color-placeholder);
 }
@@ -135,6 +135,12 @@ button:active {
   vertical-align: middle;
   justify-content: start;
   grid-area: toolbar;
+}
+
+.toolbar .divider {
+  width: 1px;
+  background-color: #eee;
+  margin: 0 4px;
 }
 
 .toolbar .toolbar-item .icon {
@@ -164,6 +170,72 @@ button:active {
   justify-content: center;
 }
 
+.dropdown {
+  z-index: 5;
+  display: block;
+  position: absolute;
+  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  min-width: 100px;
+  min-height: 40px;
+  background-color: var(--bg-color);
+}
+
+.dropdown .item {
+  margin: 0 8px 0 8px;
+  padding: 8px;
+  color: var(--txt-color);
+  cursor: pointer;
+  line-height: 16px;
+  font-size: 15px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-shrink: 0;
+  justify-content: space-between;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  border: 0;
+  min-width: 268px;
+}
+
+.dropdown .item .active {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+}
+
+.dropdown .item:first-child {
+  margin-top: 8px;
+}
+
+.dropdown .item:last-child {
+  margin-bottom: 8px;
+}
+
+.dropdown .item:hover {
+  background-color: var(--bg-color-dark);
+}
+
+.dropdown .item .text {
+  display: flex;
+  line-height: 20px;
+  flex-grow: 1;
+  width: 200px;
+}
+
+.dropdown .item .icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  user-select: none;
+  margin-right: 12px;
+  line-height: 16px;
+  background-size: contain;
+}
+
 .print-button {
   background-image: url(icons/printer.svg);
 }
@@ -186,4 +258,36 @@ button:active {
 
 .redo-button {
   background-image: url(icons/arrow-clockwise.svg);
+}
+
+.icon.paragraph {
+  background-image: url(icons/text-paragraph.svg);
+}
+
+.icon.large-heading,
+.icon.h1 {
+  background-image: url(icons/type-h1.svg);
+}
+
+.icon.small-heading,
+.icon.h2 {
+  background-image: url(icons/type-h2.svg);
+}
+
+.icon.bullet-list,
+.icon.ul {
+  background-image: url(icons/list-ul.svg);
+}
+
+.icon.numbered-list,
+.icon.ol {
+  background-image: url(icons/list-ol.svg);
+}
+
+.icon.quote {
+  background-image: url(icons/chat-square-quote.svg);
+}
+
+.icon.code {
+  background-image: url(icons/code.svg);
 }
