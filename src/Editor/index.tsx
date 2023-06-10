@@ -14,6 +14,7 @@ import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
 import DateTimePlugin from "./Plugins/DateTimePlugin";
 import HighlightPlugin from "./Plugins/HighlightPlugin";
 import PrintPlugin from "./Plugins/PrintPlugin";
+import ToolbarPlugin from "./Plugins/ToolbarPlugin";
 import TreeViewPlugin from "./Plugins/TreeViewPlugin";
 
 function onChange(editorState: EditorState) {
@@ -32,12 +33,7 @@ function Editor() {
   return (
     <div className="editor-container">
       <LexicalComposer initialConfig={config}>
-        <div className="toolbar">
-          <DateTimePlugin />
-          <HighlightPlugin />
-          <PrintPlugin />
-          <Debug handleClick={setShowDebugPanel} show={showDebugPanel} />
-        </div>
+        <ToolbarPlugin />
         <div className="sidebar">
           <DateTimePlugin />
           <HighlightPlugin />

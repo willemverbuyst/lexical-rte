@@ -179,3 +179,11 @@ button:active {
 .bug-button {
   background-image: url(icons/bug.svg);
 }
+
+.undo-button {
+  background-image: url(icons/arrow-counterclockwise.svg);
+}
+
+.redo-button {
+  background-image: url(icons/arrow-clockwise.svg);
+}
