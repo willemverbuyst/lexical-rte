@@ -6,12 +6,15 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { useState } from "react";
+import Debug from "./Components/Debug";
 import Placeholder from "./Components/Placeholder";
 import { DateTimeNode } from "./Nodes/DateTimeNode";
 import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
 import DateTimePlugin from "./Plugins/DateTimePlugin";
 import HighlightPlugin from "./Plugins/HighlightPlugin";
 import PrintPlugin from "./Plugins/PrintPlugin";
+import TreeViewPlugin from "./Plugins/TreeViewPlugin";
 
 const theme = {};
 
@@ -30,6 +33,7 @@ function onError(error: Error) {
 }
 
 function Editor() {
+  const [showDebugPanel, setShowDebugPanel] = useState(false);
   const initialConfig = {
     namespace: "PlainEditorTest",
     theme,
@@ -44,6 +48,7 @@ function Editor() {
           <DateTimePlugin />
           <HighlightPlugin />
           <PrintPlugin />
+          <Debug handleClick={setShowDebugPanel} show={showDebugPanel} />
         </div>
         <RichTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
@@ -53,7 +58,7 @@ function Editor() {
         <AutoFocusPlugin />
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
-        {/* <TreeViewPlugin /> */}
+        <TreeViewPlugin show={showDebugPanel} />
       </LexicalComposer>
     </div>
   );
