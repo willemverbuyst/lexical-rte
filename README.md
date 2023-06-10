@@ -1,3 +1,4 @@
 WIP try out lexical
 
-![](./public/Screenshot.png)
+![](./public/screenshots/Screenshot1.png)
+![](./public/screenshots/Screenshot2.png)
