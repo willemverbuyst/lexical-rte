@@ -5,15 +5,14 @@ interface Props {
 
 export default function Debug({ handleClick, show }: Props) {
   return (
-    <div className="sidebar-item">
-      <button
-        type="button"
-        aria-label="debug editor"
-        title="debug editor"
-        onClick={() => handleClick(!show)}
-      >
-        <span className="icon bug-button" />
-      </button>
-    </div>
+    <button
+      type="button"
+      aria-label="debug editor"
+      title="debug editor"
+      onClick={() => handleClick(!show)}
+      className="sidebar-item"
+    >
+      <span className="icon bug-button" />
+    </button>
   );
 }
