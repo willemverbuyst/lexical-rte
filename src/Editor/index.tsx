@@ -9,14 +9,12 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { useState } from "react";
 import Debug from "./Components/Debug";
 import Placeholder from "./Components/Placeholder";
-import { DateTimeNode } from "./Nodes/DateTimeNode";
+import config from "./config";
 import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
 import DateTimePlugin from "./Plugins/DateTimePlugin";
 import HighlightPlugin from "./Plugins/HighlightPlugin";
 import PrintPlugin from "./Plugins/PrintPlugin";
 import TreeViewPlugin from "./Plugins/TreeViewPlugin";
-
-const theme = {};
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -28,22 +26,12 @@ function onChange(editorState: EditorState) {
   });
 }
 
-function onError(error: Error) {
-  throw new Error(error.message);
-}
-
 function Editor() {
   const [showDebugPanel, setShowDebugPanel] = useState(false);
-  const initialConfig = {
-    namespace: "PlainEditorTest",
-    theme,
-    onError,
-    nodes: [DateTimeNode],
-  };
 
   return (
     <div className="editor-container">
-      <LexicalComposer initialConfig={initialConfig}>
+      <LexicalComposer initialConfig={config}>
         <div className="toolbar">
           <DateTimePlugin />
           <HighlightPlugin />
