@@ -12,7 +12,6 @@ import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
 import DateTimePlugin from "./Plugins/DateTimePlugin";
 import HighlightPlugin from "./Plugins/HighlightPlugin";
 import PrintPlugin from "./Plugins/PrintPlugin";
-import TreeViewPlugin from "./Plugins/TreeViewPlugin";
 
 const theme = {};
 
@@ -54,7 +53,7 @@ function Editor() {
         <AutoFocusPlugin />
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
-        <TreeViewPlugin />
+        {/* <TreeViewPlugin /> */}
       </LexicalComposer>
     </div>
   );

@@ -2,8 +2,8 @@ import Editor from "./Editor";
 
 function App() {
   return (
-    <div>
-      <h1>Lexical</h1>
+    <div className="container">
+      <h1 className="gradient-text">lexical rte</h1>
       <div className="editor-wrapper">
         <Editor />
       </div>
