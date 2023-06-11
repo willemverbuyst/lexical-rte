@@ -1,3 +1,6 @@
+import { CodeHighlightNode, CodeNode } from "@lexical/code";
+import { ListItemNode, ListNode } from "@lexical/list";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { DateTimeNode } from "./Nodes/DateTimeNode";
 
 function onError(error: Error) {
@@ -10,6 +13,7 @@ const theme = {
   placeholder: "editor-placeholder",
   paragraph: "editor-paragraph",
   quote: "editor-quote",
+  code: "editor-code",
   heading: {
     h1: "editor-heading-h1",
     h2: "editor-heading-h2",
@@ -24,7 +28,15 @@ const config = {
   namespace: "PlainEditorTest",
   theme,
   onError,
-  nodes: [DateTimeNode],
+  nodes: [
+    DateTimeNode,
+    HeadingNode,
+    ListNode,
+    ListItemNode,
+    QuoteNode,
+    CodeNode,
+    CodeHighlightNode,
+  ],
 };
 
 export default config;

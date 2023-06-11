@@ -4,6 +4,7 @@ import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { useState } from "react";
@@ -48,6 +49,7 @@ function Editor() {
         <AutoFocusPlugin />
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
+        <ListPlugin />
         <TreeViewPlugin show={showDebugPanel} />
       </LexicalComposer>
     </div>
