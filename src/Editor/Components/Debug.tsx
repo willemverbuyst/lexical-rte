@@ -10,9 +10,8 @@ export default function Debug({ handleClick, show }: Props) {
       aria-label="debug editor"
       title="debug editor"
       onClick={() => handleClick(!show)}
-      className="sidebar-item"
     >
-      <span className="icon bug-button" />
+      <span className="sidebar__icon sidebar__icon--bug" />
     </button>
   );
 }

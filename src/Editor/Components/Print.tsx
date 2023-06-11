@@ -9,9 +9,8 @@ export default function Print({ handleClick }: Props) {
       aria-label="export file"
       title="export file"
       onClick={handleClick}
-      className="sidebar-item"
     >
-      <span className="icon print-button" />
+      <span className="sidebar__icon sidebar__icon--print" />
     </button>
   );
 }

@@ -123,6 +123,40 @@ button:active {
   padding: 0.5rem;
 }
 
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+.sidebar .sidebar__icon {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  user-select: none;
+  background-size: contain;
+  justify-content: center;
+}
+
+.sidebar__icon--print {
+  background-image: url(icons/printer.svg);
+}
+
+.sidebar__icon--highlight {
+  background-image: url(icons/pencil-fill.svg);
+}
+
+.sidebar__icon--clock {
+  background-image: url(icons/clock.svg);
+}
+
+.sidebar__icon--bug {
+  background-image: url(icons/bug.svg);
+}
+
 .toolbar {
   display: flex;
   margin-bottom: 1px;
@@ -168,24 +202,6 @@ button:active {
   height: 16px;
   display: flex;
   user-select: none;
-}
-
-.sidebar {
-  grid-area: sidebar;
-  display: flex;
-  flex-direction: column;
-  padding: 4px;
-  vertical-align: middle;
-  justify-content: center;
-}
-
-.sidebar .sidebar-item .icon {
-  display: flex;
-  width: 2rem;
-  height: 2rem;
-  user-select: none;
-  background-size: contain;
-  justify-content: center;
 }
 
 .dropdown {
@@ -267,22 +283,6 @@ button:active {
 .editor-code {
   background-color: var(--bg-color-dark);
   color: green;
-}
-
-.print-button {
-  background-image: url(icons/printer.svg);
-}
-
-.highlight-button {
-  background-image: url(icons/pencil-fill.svg);
-}
-
-.clock-button {
-  background-image: url(icons/clock.svg);
-}
-
-.bug-button {
-  background-image: url(icons/bug.svg);
 }
 
 .undo-button {

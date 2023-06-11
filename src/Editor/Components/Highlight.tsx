@@ -9,9 +9,8 @@ export default function Highlight({ handleClick }: Props) {
       aria-label="highlight selection"
       title="highlight selection"
       onClick={handleClick}
-      className="sidebar-item"
     >
-      <span className="icon highlight-button" />
+      <span className="sidebar__icon sidebar__icon--highlight" />
     </button>
   );
 }

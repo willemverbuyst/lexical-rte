@@ -9,9 +9,8 @@ export default function DateTime({ handleClick }: Props) {
       aria-label="insert date and time"
       title="insert date and time"
       onClick={handleClick}
-      className="sidebar-item"
     >
-      <span className="sidebar-item icon clock-button" />
+      <span className="sidebar__icon sidebar__icon--clock" />
     </button>
   );
 }
