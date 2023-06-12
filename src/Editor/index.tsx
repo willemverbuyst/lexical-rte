@@ -12,6 +12,7 @@ import Debug from "./Components/Debug";
 import Placeholder from "./Components/Placeholder";
 import config from "./config";
 import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
+import CodeHighlightPlugin from "./Plugins/CodeHighlightPlugin";
 import DateTimePlugin from "./Plugins/DateTimePlugin";
 import HighlightPlugin from "./Plugins/HighlightPlugin";
 import PrintPlugin from "./Plugins/PrintPlugin";
@@ -47,6 +48,7 @@ function Editor() {
           ErrorBoundary={LexicalErrorBoundary}
         />
         <AutoFocusPlugin />
+        <CodeHighlightPlugin />
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
         <ListPlugin />

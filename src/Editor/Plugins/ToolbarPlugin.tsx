@@ -1,9 +1,15 @@
+import {
+  $isCodeNode,
+  getCodeLanguages,
+  getDefaultCodeLanguage,
+} from "@lexical/code";
 import { $isListNode, ListNode } from "@lexical/list";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $isHeadingNode } from "@lexical/rich-text";
 import { $isParentElementRTL } from "@lexical/selection";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
 import {
+  $getNodeByKey,
   $getSelection,
   $isRangeSelection,
   CAN_REDO_COMMAND,
@@ -12,7 +18,7 @@ import {
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from "lexical";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import BlockOptionsDropdownList from "../Components/BlockOptionsDropdownList";
 import { blockTypeToBlockName } from "../constants";
@@ -29,6 +35,29 @@ const supportedBlockTypes = new Set<keyof typeof blockTypeToBlockName>([
   "ol",
 ]);
 
+function Select({
+  onChange,
+  className,
+  options,
+  value,
+}: {
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  className: string;
+  options: string[];
+  value: string;
+}) {
+  return (
+    <select className={className} onChange={onChange} value={value}>
+      <option hidden value="" aria-label="empty" />
+      {options.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+}
+
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
@@ -42,6 +71,7 @@ export default function ToolbarPlugin() {
   const [showBlockOptionsDropDown, setShowBlockOptionsDropDown] =
     useState(false);
 
+  const [codeLanguage, setCodeLanguage] = useState("");
   const [, setIsRTL] = useState(false);
 
   const updateToolbar = useCallback(() => {
@@ -67,6 +97,9 @@ export default function ToolbarPlugin() {
             ? element.getTag()
             : element.getType();
           setBlockType(type);
+          if ($isCodeNode(element)) {
+            setCodeLanguage(element.getLanguage() || getDefaultCodeLanguage());
+          }
         }
       }
 
@@ -107,6 +140,21 @@ export default function ToolbarPlugin() {
       )
     );
   }, [editor, updateToolbar]);
+
+  const codeLanguges = useMemo(() => getCodeLanguages(), []);
+  const onCodeLanguageSelect = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      editor.update(() => {
+        if (selectedElementKey !== null) {
+          const node = $getNodeByKey(selectedElementKey);
+          if ($isCodeNode(node)) {
+            node.setLanguage(e.target.value);
+          }
+        }
+      });
+    },
+    [editor, selectedElementKey]
+  );
 
   return (
     <div className="toolbar" ref={toolbarRef}>
@@ -158,6 +206,17 @@ export default function ToolbarPlugin() {
             )}
         </>
       )}
+      {blockType === "code" ? (
+        <>
+          <Select
+            className="toolbar__item"
+            onChange={onCodeLanguageSelect}
+            options={codeLanguges}
+            value={codeLanguage}
+          />
+          {/* <span className="toolbar__icon chevron icon--chevron-down" /> */}
+        </>
+      ) : null}
     </div>
   );
 }
