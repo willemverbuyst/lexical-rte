@@ -11,7 +11,7 @@ export default function Debug({ handleClick, show }: Props) {
       title="debug editor"
       onClick={() => handleClick(!show)}
     >
-      <span className="sidebar__icon sidebar__icon--bug" />
+      <span className="sidebar__icon icon__bug" />
     </button>
   );
 }

@@ -10,7 +10,7 @@ export default function Highlight({ handleClick }: Props) {
       title="highlight selection"
       onClick={handleClick}
     >
-      <span className="sidebar__icon sidebar__icon--highlight" />
+      <span className="sidebar__icon icon__highlight" />
     </button>
   );
 }

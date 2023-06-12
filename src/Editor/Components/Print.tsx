@@ -10,7 +10,7 @@ export default function Print({ handleClick }: Props) {
       title="export file"
       onClick={handleClick}
     >
-      <span className="sidebar__icon sidebar__icon--print" />
+      <span className="sidebar__icon icon__print" />
     </button>
   );
 }

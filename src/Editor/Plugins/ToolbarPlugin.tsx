@@ -116,10 +116,9 @@ export default function ToolbarPlugin() {
         onClick={() => {
           editor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
-        className="toolbar-item"
         aria-label="Undo"
       >
-        <span className="icon undo-button" />
+        <span className="toolbar__icon icon--undo-button" />
       </button>
       <button
         disabled={!canRedo}
@@ -127,24 +126,25 @@ export default function ToolbarPlugin() {
         onClick={() => {
           editor.dispatchCommand(REDO_COMMAND, undefined);
         }}
-        className="toolbar-item"
         aria-label="Redo"
       >
-        <span className="icon redo-button" />
+        <span className="toolbar__icon icon--redo-button" />
       </button>
       {supportedBlockTypes.has(blockType) && (
         <>
           <button
-            className="toolbar-item block-controls"
+            className="toolbar__item"
             type="button"
             onClick={() =>
               setShowBlockOptionsDropDown(!showBlockOptionsDropDown)
             }
             aria-label="Formatting Options"
           >
-            <span className={`icon block-type ${blockType}`} />
-            <span className="text">{blockTypeToBlockName[blockType]}</span>
-            <i className="chevron-down" />
+            <span className={`toolbar__icon icon--${blockType}`} />
+            <span className="toolbar__item-text">
+              {blockTypeToBlockName[blockType]}
+            </span>
+            <span className="toolbar__icon chevron icon--chevron-down" />
           </button>
           {showBlockOptionsDropDown &&
             createPortal(

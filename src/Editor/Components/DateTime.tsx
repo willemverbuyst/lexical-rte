@@ -10,7 +10,7 @@ export default function DateTime({ handleClick }: Props) {
       title="insert date and time"
       onClick={handleClick}
     >
-      <span className="sidebar__icon sidebar__icon--clock" />
+      <span className="sidebar__icon icon__clock" />
     </button>
   );
 }
