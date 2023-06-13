@@ -37,17 +37,15 @@ const supportedBlockTypes = new Set<keyof typeof blockTypeToBlockName>([
 
 function Select({
   onChange,
-  className,
   options,
   value,
 }: {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  className: string;
   options: string[];
   value: string;
 }) {
   return (
-    <select className={className} onChange={onChange} value={value}>
+    <select onChange={onChange} value={value}>
       <option hidden value="" aria-label="empty" />
       {options.map((option) => (
         <option key={option} value={option}>
@@ -207,15 +205,14 @@ export default function ToolbarPlugin() {
         </>
       )}
       {blockType === "code" ? (
-        <>
+        <div className="toolbar__item">
           <Select
-            className="toolbar__item"
             onChange={onCodeLanguageSelect}
             options={codeLanguges}
             value={codeLanguage}
           />
-          {/* <span className="toolbar__icon chevron icon--chevron-down" /> */}
-        </>
+          <span className="toolbar__icon chevron select__chevron icon--chevron-down" />
+        </div>
       ) : null}
     </div>
   );

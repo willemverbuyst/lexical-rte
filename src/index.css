@@ -26,8 +26,7 @@ body {
   color: var(--txt-color);
 }
 
-button,
-select {
+button {
   margin: 0.2rem;
   font-size: 1rem;
   text-transform: uppercase;
@@ -221,9 +220,36 @@ button:active {
 
 .toolbar__item {
   display: flex;
-  background: none;
   align-items: center;
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: var(--txt-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  background: var(--bg-color);
+  box-shadow: inset 1px 1px 1px var(--bg-color-light),
+    inset -1px -1px 1px var(--bg-color-dark);
+}
+
+.toolbar__item select {
+  margin: 0.2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--txt-color);
+  font-weight: bold;
   border: none;
+  background: var(--bg-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .toolbar__item-text {
@@ -299,6 +325,11 @@ button:active {
   width: 1rem;
   height: 1rem;
   user-select: none;
+}
+
+.select__chevron {
+  display: flex;
+  pointer-events: none;
 }
 
 .editor-quote {
