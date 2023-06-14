@@ -58,6 +58,26 @@ button:active {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+}
+
+.link {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.link__icon {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  user-select: none;
+  background-size: contain;
+  justify-content: center;
+}
+
+.icon__github {
+  background-image: url(icons/github.svg);
 }
 
 .gradient-text {
