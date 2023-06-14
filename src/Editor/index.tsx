@@ -8,16 +8,16 @@ import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { useState } from "react";
-import Debug from "./Components/Debug";
-import Placeholder from "./Components/Placeholder";
 import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
 import CodeHighlightPlugin from "./Plugins/CodeHighlightPlugin";
-import DateTimePlugin from "./Plugins/DateTimePlugin";
-import HighlightPlugin from "./Plugins/HighlightPlugin";
-import PrintPlugin from "./Plugins/PrintPlugin";
+import SidebarPlugin from "./Plugins/SidebarPlugin";
 import ToolbarPlugin from "./Plugins/ToolbarPlugin";
 import TreeViewPlugin from "./Plugins/TreeViewPlugin";
 import config from "./config";
+
+function Placeholder() {
+  return <div className="placeholder">Enter some text...</div>;
+}
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -27,19 +27,14 @@ function onChange(editorState: EditorState) {
   });
 }
 
-function Editor() {
+export default function Editor() {
   const [showDebugPanel, setShowDebugPanel] = useState(false);
 
   return (
     <div className="editor-container">
       <LexicalComposer initialConfig={config}>
         <ToolbarPlugin />
-        <div className="sidebar">
-          <DateTimePlugin />
-          <HighlightPlugin />
-          <PrintPlugin />
-          <Debug handleClick={setShowDebugPanel} show={showDebugPanel} />
-        </div>
+        <SidebarPlugin handleClick={setShowDebugPanel} show={showDebugPanel} />
         <RichTextPlugin
           contentEditable={<ContentEditable className="editor-input" />}
           placeholder={<Placeholder />}
@@ -55,5 +50,3 @@ function Editor() {
     </div>
   );
 }
-
-export default Editor;
