@@ -430,10 +430,10 @@
     parse-svg-path "^0.1.2"
     svg-arc-to-cubic-bezier "^3.2.0"
 
-"@react-pdf/renderer@^3.1.11":
-  version "3.1.11"
-  resolved "https://registry.yarnpkg.com/@react-pdf/renderer/-/renderer-3.1.11.tgz#7a7f80e2a021de6e12a1463847e5bc9ca39586c0"
-  integrity sha512-te/RTcyTkIg6zlvuoUYs5cEXPyZPjADrhcm/6EA2OudMmmwHlTrsinMgLuB8aGlSjmgo3anlu1soIC2j+KsyTQ==
+"@react-pdf/renderer@^3.1.12":
+  version "3.1.12"
+  resolved "https://registry.yarnpkg.com/@react-pdf/renderer/-/renderer-3.1.12.tgz#3c208a35662c561712acad1e06ccd0b753b2472a"
+  integrity sha512-y4H2ELH0okJP7+ig+uNjFAfuAanWiF3mxsKsE7ZBuhF4tabbMt9fX+pQ7qn4xrzEWX0vlso6s6ebkkeGdSGWzA==
   dependencies:
     "@babel/runtime" "^7.20.13"
     "@react-pdf/font" "^2.3.6"
