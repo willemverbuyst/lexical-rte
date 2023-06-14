@@ -1,4 +1,4 @@
-import { $getRoot, $getSelection, EditorState } from "lexical";
+import { EditorState } from "lexical";
 
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -10,7 +10,6 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { useState } from "react";
 import Debug from "./Components/Debug";
 import Placeholder from "./Components/Placeholder";
-import config from "./config";
 import AutoFocusPlugin from "./Plugins/AutoFocusPlugin";
 import CodeHighlightPlugin from "./Plugins/CodeHighlightPlugin";
 import DateTimePlugin from "./Plugins/DateTimePlugin";
@@ -18,13 +17,12 @@ import HighlightPlugin from "./Plugins/HighlightPlugin";
 import PrintPlugin from "./Plugins/PrintPlugin";
 import ToolbarPlugin from "./Plugins/ToolbarPlugin";
 import TreeViewPlugin from "./Plugins/TreeViewPlugin";
+import config from "./config";
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
-    const root = $getRoot();
-    const selection = $getSelection();
-
-    // eslint-disable-next-line no-console
+    // const root = $getRoot();
+    // const selection = $getSelection();
     // console.log(root, selection);
   });
 }

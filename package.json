@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "format:check": "prettier --check src",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,tsx --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "type:check": "tsc"
   },
   "dependencies": {
     "@lexical/code": "^0.11.1",
