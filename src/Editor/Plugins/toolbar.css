@@ -1,0 +1,229 @@
+.toolbar {
+  grid-area: toolbar;
+  display: flex;
+  vertical-align: middle;
+  justify-content: start;
+}
+
+.toolbar__item {
+  height: 3rem;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem;
+  background: var(--bg-color);
+  color: var(--txt-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  box-shadow: inset 1px 1px 1px var(--bg-color-light),
+    inset -1px -1px 1px var(--bg-color-dark);
+}
+
+.toolbar__dropdown {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem;
+  padding: 0 1rem;
+  background: var(--bg-color);
+  color: inherit;
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  box-shadow: inset 1px 1px 1px var(--bg-color-light),
+    inset -1px -1px 1px var(--bg-color-dark);
+}
+
+.toolbar__dropdown button {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar__dropdown-text {
+  margin: 0.5rem;
+  color: var(--txt-color);
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+.toolbar__dropdown-chevron {
+  width: 1rem;
+  height: 1rem;
+  user-select: none;
+}
+
+.toolbar__icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  background-size: contain;
+}
+
+.icon__undo-button {
+  background-image: url(icons/arrow-counterclockwise.svg);
+}
+
+.icon__redo-button {
+  background-image: url(icons/arrow-clockwise.svg);
+}
+
+.icon__paragraph {
+  background-image: url(icons/text-paragraph.svg);
+}
+
+.icon__large-heading,
+.icon__h1 {
+  background-image: url(icons/type-h1.svg);
+}
+
+.icon__small-heading,
+.icon__h2 {
+  background-image: url(icons/type-h2.svg);
+}
+
+.icon__bullet-list,
+.icon__ul {
+  background-image: url(icons/list-ul.svg);
+}
+
+.icon__numbered-list,
+.icon__ol {
+  background-image: url(icons/list-ol.svg);
+}
+
+.icon__quote {
+  background-image: url(icons/chat-square-quote.svg);
+}
+
+.icon__code {
+  background-image: url(icons/code.svg);
+}
+
+.icon__chevron-down {
+  background-image: url(icons/chevron-down.svg);
+}
+
+.dropdown {
+  z-index: 5;
+  min-width: 13.5rem;
+  min-height: 10rem;
+  display: block;
+  position: absolute;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+}
+
+.dropdown__item {
+  color: var(--txt-color);
+  margin: 0 8px 0 8px;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-shrink: 0;
+  border: 0;
+  min-width: 13.5rem;
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  box-shadow: inset 1px 1px 1px var(--bg-color-light),
+    inset -1px -1px 1px var(--bg-color-dark);
+}
+
+.dropdown__item-text {
+  display: flex;
+  flex-grow: 1;
+  line-height: 20px;
+  user-select: none;
+}
+
+.dropdown__item--active {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  background-size: contain;
+}
+
+.dropdown__item:first-child {
+  margin-top: 8px;
+}
+
+.dropdown__item:last-child {
+  margin-bottom: 8px;
+}
+
+.dropdown__item:hover {
+  background-color: var(--bg-color-dark);
+}
+
+.dropdown__icon {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  margin-right: 12px;
+  line-height: 16px;
+  background-size: contain;
+  user-select: none;
+}
+
+.toolbar__select {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem;
+  padding: 0 1rem;
+  background: var(--bg-color);
+  color: var(--txt-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  box-shadow: inset 1px 1px 1px var(--bg-color-light),
+    inset -1px -1px 1px var(--bg-color-dark);
+  position: relative;
+}
+
+.toolbar__select select {
+  height: 2rem;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+  text-transform: capitalize;
+  margin: 0rem;
+  padding: 0rem;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 10rem;
+}
+
+.toolbar__select-chevron {
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  user-select: none;
+}

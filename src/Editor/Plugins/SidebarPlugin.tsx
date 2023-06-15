@@ -12,6 +12,7 @@ import printJS from "print-js";
 import { useState } from "react";
 import Html from "react-pdf-html";
 import { DateTimeNode } from "../Nodes/DateTimeNode";
+import "./sidebar.css";
 
 function CreateDocument({ html }: { html: string }) {
   return (
@@ -87,6 +88,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         aria-label="insert date and time"
         title="insert date and time"
         onClick={handleDateTimeClick}
+        className="sidebar__item"
       >
         <span className="sidebar__icon icon__clock" />
       </button>
@@ -96,6 +98,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         aria-label="highlight selection"
         title="highlight selection"
         onClick={handleHighlightClick}
+        className="sidebar__item"
       >
         <span className="sidebar__icon icon__highlight" />
       </button>
@@ -105,6 +108,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         aria-label="export file"
         title="export file"
         onClick={handlePrintClick}
+        className="sidebar__item"
       >
         <span className="sidebar__icon icon__print" />
       </button>
@@ -114,6 +118,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         aria-label="debug editor"
         title="debug editor"
         onClick={() => handleClick(!show)}
+        className="sidebar__item"
       >
         <span className="sidebar__icon icon__bug" />
       </button>
