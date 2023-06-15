@@ -153,7 +153,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatParagraph}
       >
-        <span className="dropdown__icon icon--paragraph" />
+        <span className="dropdown__icon icon__paragraph" />
         <span className="dropdown__item-text">Normal</span>
         {blockType === "paragraph" && (
           <span className="dropdown__item--active" />
@@ -164,7 +164,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatLargeHeading}
       >
-        <span className="dropdown__icon icon--large-heading" />
+        <span className="dropdown__icon icon__large-heading" />
         <span className="dropdown__item-text">Large Heading</span>
         {blockType === "h1" && <span className="dropdown__item--active" />}
       </button>
@@ -173,7 +173,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatSmallHeading}
       >
-        <span className="dropdown__icon icon--small-heading" />
+        <span className="dropdown__icon icon__small-heading" />
         <span className="dropdown__item-text">Small Heading</span>
         {blockType === "h2" && <span className="dropdown__item--active" />}
       </button>
@@ -182,7 +182,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatBulletList}
       >
-        <span className="dropdown__icon icon--bullet-list" />
+        <span className="dropdown__icon icon__bullet-list" />
         <span className="dropdown__item-text">Bullet List</span>
         {blockType === "ul" && <span className="dropdown__item--active" />}
       </button>
@@ -191,17 +191,17 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatNumberedList}
       >
-        <span className="dropdown__icon icon--numbered-list" />
+        <span className="dropdown__icon icon__numbered-list" />
         <span className="dropdown__item-text">Numbered List</span>
         {blockType === "ol" && <span className="dropdown__item--active" />}
       </button>
       <button type="button" className="dropdown__item" onClick={formatQuote}>
-        <span className="dropdown__icon icon--quote" />
+        <span className="dropdown__icon icon__quote" />
         <span className="dropdown__item-text">Quote</span>
         {blockType === "quote" && <span className="dropdown__item--active" />}
       </button>
       <button type="button" className="dropdown__item" onClick={formatCode}>
-        <span className=" dropdown__icon icon--code" />
+        <span className=" dropdown__icon icon__code" />
         <span className="dropdown__item-text">Code Block</span>
         {blockType === "code" && <span className="dropdown__item--active" />}
       </button>

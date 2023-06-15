@@ -22,6 +22,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import BlockOptionsDropdownList from "../Components/BlockOptionsDropdownList";
 import { blockTypeToBlockName } from "../constants";
+import "./toolbar.css";
 
 const LowPriority = 1;
 
@@ -156,41 +157,44 @@ export default function ToolbarPlugin() {
 
   return (
     <div className="toolbar" ref={toolbarRef}>
-      <button
-        disabled={!canUndo}
-        type="button"
-        onClick={() => {
-          editor.dispatchCommand(UNDO_COMMAND, undefined);
-        }}
-        aria-label="Undo"
-      >
-        <span className="toolbar__icon icon--undo-button" />
-      </button>
-      <button
-        disabled={!canRedo}
-        type="button"
-        onClick={() => {
-          editor.dispatchCommand(REDO_COMMAND, undefined);
-        }}
-        aria-label="Redo"
-      >
-        <span className="toolbar__icon icon--redo-button" />
-      </button>
+      <div className="toolbar__item">
+        <button
+          disabled={!canUndo}
+          type="button"
+          onClick={() => {
+            editor.dispatchCommand(UNDO_COMMAND, undefined);
+          }}
+          aria-label="Undo"
+        >
+          <span className="toolbar__icon icon__undo-button" />
+        </button>
+      </div>
+      <div className="toolbar__item">
+        <button
+          disabled={!canRedo}
+          type="button"
+          onClick={() => {
+            editor.dispatchCommand(REDO_COMMAND, undefined);
+          }}
+          aria-label="Redo"
+        >
+          <span className="toolbar__icon icon__redo-button" />
+        </button>
+      </div>
       {supportedBlockTypes.has(blockType) && (
-        <>
+        <div className="toolbar__dropdown">
           <button
-            className="toolbar__item"
             type="button"
             onClick={() =>
               setShowBlockOptionsDropDown(!showBlockOptionsDropDown)
             }
             aria-label="Formatting Options"
           >
-            <span className={`toolbar__icon icon--${blockType}`} />
-            <span className="toolbar__item-text">
+            <span className={`toolbar__icon icon__${blockType}`} />
+            <span className="toolbar__dropdown-text">
               {blockTypeToBlockName[blockType]}
             </span>
-            <span className="toolbar__icon chevron icon--chevron-down" />
+            <span className="toolbar__dropdown-chevron icon__chevron-down" />
           </button>
           {showBlockOptionsDropDown &&
             createPortal(
@@ -202,16 +206,16 @@ export default function ToolbarPlugin() {
               />,
               document.body
             )}
-        </>
+        </div>
       )}
       {blockType === "code" ? (
-        <div className="toolbar__item">
+        <div className="toolbar__select">
           <Select
             onChange={onCodeLanguageSelect}
             options={codeLanguges}
             value={codeLanguage}
           />
-          <span className="toolbar__icon chevron select__chevron icon--chevron-down" />
+          <span className="toolbar__select-chevron icon__chevron-down" />
         </div>
       ) : null}
     </div>
