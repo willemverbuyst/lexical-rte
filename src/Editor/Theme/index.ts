@@ -1,12 +1,3 @@
-import { CodeHighlightNode, CodeNode } from "@lexical/code";
-import { ListItemNode, ListNode } from "@lexical/list";
-import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { DateTimeNode } from "./Nodes/DateTimeNode";
-
-function onError(error: Error) {
-  throw new Error(error.message);
-}
-
 const theme = {
   ltr: "ltr",
   rtl: "rtl",
@@ -56,19 +47,4 @@ const theme = {
   },
 };
 
-const config = {
-  namespace: "PlainEditorTest",
-  theme,
-  onError,
-  nodes: [
-    DateTimeNode,
-    HeadingNode,
-    ListNode,
-    ListItemNode,
-    QuoteNode,
-    CodeNode,
-    CodeHighlightNode,
-  ],
-};
-
-export default config;
+export default theme;
