@@ -40,16 +40,6 @@ button {
   background-color: transparent;
 }
 
-button:focus,
-button:hover {
-  outline: none;
-}
-
-/* button:active {
-  box-shadow: inset 1px 1px 1px var(--bg-color-dark),
-    inset -1px -1px 1px var(--bg-color-light);
-} */
-
 .container {
   width: 100vw;
   display: flex;
@@ -100,7 +90,7 @@ button:hover {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 5rem;
-  grid-template-rows: 4rem 1fr;
+  grid-template-rows: 3rem 1fr;
   grid-template-areas:
     "toolbar toolbar"
     "editor sidebar";
@@ -120,7 +110,7 @@ button:hover {
 
 .placeholder {
   position: absolute;
-  top: 5rem;
+  top: 4rem;
   left: 1rem;
   color: var(--txt-color-placeholder);
 }
