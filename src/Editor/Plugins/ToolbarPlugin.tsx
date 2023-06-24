@@ -26,6 +26,7 @@ import {
   $isRangeSelection,
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
+  FORMAT_TEXT_COMMAND,
   LexicalEditor,
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
@@ -290,6 +291,11 @@ export default function ToolbarPlugin() {
 
   const [codeLanguage, setCodeLanguage] = useState("");
   const [, setIsRTL] = useState(false);
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
+  const [isStrikethrough, setIsStrikethrough] = useState(false);
+  const [isCode, setIsCode] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -319,7 +325,11 @@ export default function ToolbarPlugin() {
           }
         }
       }
-
+      setIsBold(selection.hasFormat("bold"));
+      setIsItalic(selection.hasFormat("italic"));
+      setIsUnderline(selection.hasFormat("underline"));
+      setIsStrikethrough(selection.hasFormat("strikethrough"));
+      setIsCode(selection.hasFormat("code"));
       setIsRTL($isParentElementRTL(selection));
     }
   }, [editor]);
@@ -435,7 +445,72 @@ export default function ToolbarPlugin() {
           />
           <span className="toolbar__select-chevron icon__chevron-down" />
         </div>
-      ) : null}
+      ) : (
+        <>
+          <div className="toolbar__item">
+            <button
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
+              }}
+              className={`toolbar-item spaced ${isBold ? "active" : ""}`}
+              aria-label="Format Bold"
+            >
+              <span className="toolbar__icon icon__type-bold" />
+            </button>
+          </div>
+          <div className="toolbar__item">
+            <button
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
+              }}
+              className={`toolbar-item spaced ${isItalic ? "active" : ""}`}
+              aria-label="Format Italics"
+            >
+              <span className="toolbar__icon icon__type-italic" />
+            </button>
+          </div>
+          <div className="toolbar__item">
+            <button
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+              }}
+              className={`toolbar-item spaced ${isUnderline ? "active" : ""}`}
+              aria-label="Format Underline"
+            >
+              <span className="toolbar__icon icon__type-underline" />
+            </button>
+          </div>
+          <div className="toolbar__item">
+            <button
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
+              }}
+              className={`toolbar-item spaced ${
+                isStrikethrough ? "active" : ""
+              }`}
+              aria-label="Format Strikethrough"
+            >
+              <span className="toolbar__icon icon__type-strikethrough" />
+            </button>
+          </div>
+          <div className="toolbar__item">
+            <button
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
+              }}
+              className={`toolbar-item spaced ${isCode ? "active" : ""}`}
+              aria-label="Insert Code"
+            >
+              <span className="toolbar__icon icon__code" />
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

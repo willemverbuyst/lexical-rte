@@ -237,3 +237,19 @@
   pointer-events: none;
   user-select: none;
 }
+
+.icon__type-bold {
+  background-image: url(icons/type-bold.svg);
+}
+
+.icon__type-italic {
+  background-image: url(icons/type-italic.svg);
+}
+
+.icon__type-underline {
+  background-image: url(icons/type-underline.svg);
+}
+
+.icon__type-strikethrough {
+  background-image: url(icons/type-strikethrough.svg);
+}
