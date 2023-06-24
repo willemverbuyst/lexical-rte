@@ -12,6 +12,17 @@ const theme = {
     h5: "editor-heading-h5",
     h6: "editor-heading-h6",
   },
+  link: "editor-link",
+  text: {
+    bold: "editor-text-bold",
+    italic: "editor-text-italic",
+    overflowed: "editor-text-overflowed",
+    hashtag: "editor-text-hashtag",
+    underline: "editor-text-underline",
+    strikethrough: "editor-text-strikethrough",
+    underlineStrikethrough: "editor-text-underlineStrikethrough",
+    code: "editor-text-code",
+  },
   code: "editor-code",
   codeHighlight: {
     atrule: "editor-tokenAttr",

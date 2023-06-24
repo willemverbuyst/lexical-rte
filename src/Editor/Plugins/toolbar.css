@@ -6,8 +6,8 @@
 }
 
 .toolbar__item {
-  height: 2rem;
-  width: 2.5rem;
+  height: 2.5rem;
+  width: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,12 +26,27 @@
 }
 
 .toolbar__item:active {
-  box-shadow: inset 1px 1px 1px var(--bg-color-dark),
-    inset -1px -1px 1px var(--bg-color-light);
+  box-shadow: -1px -1px 1px var(--bg-color-dark),
+    1px 1px 1px var(--bg-color-light);
+}
+
+.toolbar__item--active {
+  height: 2.5rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.3rem;
+  background: var(--bg-color);
+  color: var(--txt-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  box-shadow: -2px -2px 2px var(--bg-color-dark),
+    2px 2px 2px var(--bg-color-light);
 }
 
 .toolbar__dropdown {
-  height: 2rem;
+  height: 2.5rem;
   align-items: center;
   justify-content: center;
   margin: 0.3rem;
@@ -187,7 +202,7 @@
 }
 
 .toolbar__select {
-  height: 2rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,4 +251,20 @@
   transform: translateY(-50%);
   pointer-events: none;
   user-select: none;
+}
+
+.icon__type-bold {
+  background-image: url(icons/type-bold.svg);
+}
+
+.icon__type-italic {
+  background-image: url(icons/type-italic.svg);
+}
+
+.icon__type-underline {
+  background-image: url(icons/type-underline.svg);
+}
+
+.icon__type-strikethrough {
+  background-image: url(icons/type-strikethrough.svg);
 }

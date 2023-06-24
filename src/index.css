@@ -1,5 +1,5 @@
 :root {
-  font-family: "Karla", sans-serif;
+  font-family: "Ysabeau SC", sans-serif;
   background-color: #333;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -97,7 +97,7 @@ button {
 }
 
 .editor-input {
-  width: 40rem;
+  width: 60rem;
   min-height: 20rem;
   padding: 0 1rem;
   border: 2px solid var(--bg-color);
@@ -117,13 +117,14 @@ button {
 
 .debug-panel {
   margin-top: 3rem;
-  width: 40rem;
+  width: 60rem;
   min-height: 20rem;
   padding: 0 1rem;
   border: 2px solid var(--bg-color);
   box-shadow: inset 0.5px 0.5px 0.5px var(--bg-color-light),
     inset -0.5px -0.5px 0.5px var(--bg-color-dark);
   border-radius: 7px;
+  margin-bottom: 4rem;
 }
 
 .tree-view-output {
@@ -209,4 +210,37 @@ button {
 
 .editor-tokenFunction {
   color: #dd4a68;
+}
+
+.editor-text-bold {
+  font-weight: 1000;
+}
+
+.editor-text-italic {
+  font-style: italic;
+}
+
+.editor-text-underline {
+  text-decoration: underline;
+}
+
+.editor-text-strikethrough {
+  text-decoration: line-through;
+}
+
+.editor-text-underlineStrikethrough {
+  text-decoration: underline line-through;
+}
+
+.editor-text-code {
+  background-color: rgb(240, 242, 245);
+  color: #333;
+  padding: 1px 0.25rem;
+  font-family: Menlo, Consolas, Monaco, monospace;
+  font-size: 94%;
+}
+
+.editor-link {
+  color: rgb(33, 111, 219);
+  text-decoration: none;
 }
