@@ -385,30 +385,29 @@ export default function ToolbarPlugin() {
 
   return (
     <div className="toolbar" ref={toolbarRef}>
-      <div className="toolbar__item">
-        <button
-          disabled={!canUndo}
-          type="button"
-          onClick={() => {
-            editor.dispatchCommand(UNDO_COMMAND, undefined);
-          }}
-          aria-label="Undo"
-        >
-          <span className="toolbar__icon icon__undo-button" />
-        </button>
-      </div>
-      <div className="toolbar__item">
-        <button
-          disabled={!canRedo}
-          type="button"
-          onClick={() => {
-            editor.dispatchCommand(REDO_COMMAND, undefined);
-          }}
-          aria-label="Redo"
-        >
-          <span className="toolbar__icon icon__redo-button" />
-        </button>
-      </div>
+      <button
+        disabled={!canUndo}
+        type="button"
+        onClick={() => {
+          editor.dispatchCommand(UNDO_COMMAND, undefined);
+        }}
+        aria-label="Undo"
+        className="toolbar__item"
+      >
+        <span className="toolbar__icon icon__undo-button" />
+      </button>
+      <button
+        disabled={!canRedo}
+        type="button"
+        onClick={() => {
+          editor.dispatchCommand(REDO_COMMAND, undefined);
+        }}
+        aria-label="Redo"
+        className="toolbar__item"
+      >
+        <span className="toolbar__icon icon__redo-button" />
+      </button>
+
       {supportedBlockTypes.has(blockType) && (
         <div className="toolbar__dropdown">
           <button
@@ -447,68 +446,58 @@ export default function ToolbarPlugin() {
         </div>
       ) : (
         <>
-          <div className="toolbar__item">
-            <button
-              type="button"
-              onClick={() => {
-                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
-              }}
-              className={`toolbar-item spaced ${isBold ? "active" : ""}`}
-              aria-label="Format Bold"
-            >
-              <span className="toolbar__icon icon__type-bold" />
-            </button>
-          </div>
-          <div className="toolbar__item">
-            <button
-              type="button"
-              onClick={() => {
-                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
-              }}
-              className={`toolbar-item spaced ${isItalic ? "active" : ""}`}
-              aria-label="Format Italics"
-            >
-              <span className="toolbar__icon icon__type-italic" />
-            </button>
-          </div>
-          <div className="toolbar__item">
-            <button
-              type="button"
-              onClick={() => {
-                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
-              }}
-              className={`toolbar-item spaced ${isUnderline ? "active" : ""}`}
-              aria-label="Format Underline"
-            >
-              <span className="toolbar__icon icon__type-underline" />
-            </button>
-          </div>
-          <div className="toolbar__item">
-            <button
-              type="button"
-              onClick={() => {
-                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
-              }}
-              className={`toolbar-item spaced ${
-                isStrikethrough ? "active" : ""
-              }`}
-              aria-label="Format Strikethrough"
-            >
-              <span className="toolbar__icon icon__type-strikethrough" />
-            </button>
-          </div>
-          <div className="toolbar__item">
-            <button
-              type="button"
-              onClick={() => {
-                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
-              }}
-              className={`toolbar-item spaced ${isCode ? "active" : ""}`}
-              aria-label="Insert Code"
-            >
-              <span className="toolbar__icon icon__code" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
+            }}
+            className={isBold ? "toolbar__item--active" : "toolbar__item"}
+            aria-label="Format Bold"
+          >
+            <span className="toolbar__icon icon__type-bold" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
+            }}
+            className={isItalic ? "toolbar__item--active" : "toolbar__item"}
+            aria-label="Format Italics"
+          >
+            <span className="toolbar__icon icon__type-italic" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+            }}
+            className={isUnderline ? "toolbar__item--active" : "toolbar__item"}
+            aria-label="Format Underline"
+          >
+            <span className="toolbar__icon icon__type-underline" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
+            }}
+            className={
+              isStrikethrough ? "toolbar__item--active" : "toolbar__item"
+            }
+            aria-label="Format Strikethrough"
+          >
+            <span className="toolbar__icon icon__type-strikethrough" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
+            }}
+            className={isCode ? "toolbar__item--active" : "toolbar__item"}
+            aria-label="Insert Code"
+          >
+            <span className="toolbar__icon icon__code" />
+          </button>
         </>
       )}
     </div>

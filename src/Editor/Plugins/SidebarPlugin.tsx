@@ -31,7 +31,8 @@ interface Props {
 
 export default function SidebarPlugin({ handleClick, show }: Props) {
   const [editor] = useLexicalComposerContext();
-  const [active, setActive] = useState(false);
+  const [highlightActive, setHighlightActive] = useState(false);
+  const [debugActive, setDebugActive] = useState(show);
 
   const date = new Date();
   const color = "#f8ff00";
@@ -51,8 +52,8 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
   };
 
   const handleHighlightClick = () => {
-    const newActiveState = !active;
-    setActive(newActiveState);
+    const newActiveState = !highlightActive;
+    setHighlightActive(newActiveState);
 
     editor.update(() => {
       const selection = $getSelection();
@@ -81,6 +82,11 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
       });
   };
 
+  const handleDebugClick = () => {
+    setDebugActive(!show);
+    handleClick(!show);
+  };
+
   return (
     <div className="sidebar">
       <button
@@ -98,7 +104,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         aria-label="highlight selection"
         title="highlight selection"
         onClick={handleHighlightClick}
-        className="sidebar__item"
+        className={highlightActive ? "sidebar__item--active" : "sidebar__item"}
       >
         <span className="sidebar__icon icon__highlight" />
       </button>
@@ -117,8 +123,8 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         type="button"
         aria-label="debug editor"
         title="debug editor"
-        onClick={() => handleClick(!show)}
-        className="sidebar__item"
+        onClick={handleDebugClick}
+        className={debugActive ? "sidebar__item--active" : "sidebar__item"}
       >
         <span className="sidebar__icon icon__bug" />
       </button>
