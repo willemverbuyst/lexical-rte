@@ -111,20 +111,20 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
 
       <button
         type="button"
-        aria-label="export file"
-        title="export file"
         onClick={handlePrintClick}
         className="sidebar__item"
+        aria-label="Export file"
+        title="export file"
       >
         <span className="sidebar__icon icon__print" />
       </button>
 
       <button
         type="button"
-        aria-label="debug editor"
-        title="debug editor"
         onClick={handleDebugClick}
         className={debugActive ? "sidebar__item--active" : "sidebar__item"}
+        aria-label="Debug editor"
+        title="debug editor"
       >
         <span className="sidebar__icon icon__bug" />
       </button>
