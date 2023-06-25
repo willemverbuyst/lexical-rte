@@ -41,6 +41,7 @@
   margin: 0.3rem;
   background: var(--bg-color);
   color: var(--txt-color);
+  border: 1px solid var(--bg-color);
   border-radius: 7px;
   box-shadow: -2px -2px 2px var(--bg-color-dark),
     2px 2px 2px var(--bg-color-light);
