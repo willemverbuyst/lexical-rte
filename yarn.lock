@@ -214,7 +214,7 @@
   dependencies:
     "@lexical/selection" "0.11.1"
 
-"@lexical/link@0.11.1":
+"@lexical/link@0.11.1", "@lexical/link@^0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@lexical/link/-/link-0.11.1.tgz#4bc0d68b7a7c598cf3cde58d067c9aa900a87420"
   integrity sha512-eEVZfSvdYKyjv5g35Rm50y+gglg4d5hgjiWuHzynT6XknU1VmR/WknEdSQybPK9vo2E2qf3qURyp1oAUaAPVjw==

@@ -1,9 +1,11 @@
+/* eslint-disable no-param-reassign */
 import {
   $createCodeNode,
   $isCodeNode,
   getCodeLanguages,
   getDefaultCodeLanguage,
 } from "@lexical/code";
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import {
   $isListNode,
   INSERT_ORDERED_LIST_COMMAND,
@@ -17,7 +19,11 @@ import {
   $createQuoteNode,
   $isHeadingNode,
 } from "@lexical/rich-text";
-import { $isParentElementRTL, $wrapNodes } from "@lexical/selection";
+import {
+  $isAtNodeEnd,
+  $isParentElementRTL,
+  $wrapNodes,
+} from "@lexical/selection";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
 import {
   $createParagraphNode,
@@ -27,8 +33,11 @@ import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
   FORMAT_TEXT_COMMAND,
+  GridSelection,
   LexicalEditor,
+  NodeSelection,
   REDO_COMMAND,
+  RangeSelection,
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from "lexical";
@@ -60,6 +69,179 @@ const blockTypeToBlockName = {
   quote: "Quote",
   ul: "Bulleted List",
 } as const;
+
+function getSelectedNode(selection: RangeSelection) {
+  const { anchor } = selection;
+  const { focus } = selection;
+  const anchorNode = selection.anchor.getNode();
+  const focusNode = selection.focus.getNode();
+  if (anchorNode === focusNode) {
+    return anchorNode;
+  }
+  const isBackward = selection.isBackward();
+  if (isBackward) {
+    return $isAtNodeEnd(focus) ? anchorNode : focusNode;
+  }
+  return $isAtNodeEnd(anchor) ? focusNode : anchorNode;
+}
+
+function positionEditorElement(editor: HTMLDivElement, rect: DOMRect | null) {
+  if (rect === null) {
+    editor.style.opacity = "0";
+    editor.style.top = "-1000px";
+    editor.style.left = "-1000px";
+  } else {
+    editor.style.opacity = "1";
+    editor.style.top = `${rect.top + rect.height + window.pageYOffset + 10}px`;
+    editor.style.left = `${
+      rect.left + window.pageXOffset - editor.offsetWidth / 2 + rect.width / 2
+    }px`;
+  }
+}
+
+function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
+  const editorRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const mouseDownRef = useRef(false);
+  const [linkUrl, setLinkUrl] = useState("");
+  const [isEditMode, setEditMode] = useState(false);
+  const [lastSelection, setLastSelection] = useState<
+    RangeSelection | NodeSelection | GridSelection | null
+  >(null);
+
+  const updateLinkEditor = useCallback(() => {
+    const selection = $getSelection();
+    if ($isRangeSelection(selection)) {
+      const node = getSelectedNode(selection);
+      const parent = node.getParent();
+      if ($isLinkNode(parent)) {
+        setLinkUrl(parent.getURL());
+      } else if ($isLinkNode(node)) {
+        setLinkUrl(node.getURL());
+      } else {
+        setLinkUrl("");
+      }
+    }
+    const editorElem = editorRef.current;
+    const nativeSelection = window.getSelection();
+
+    if (!nativeSelection) {
+      return;
+    }
+
+    const { activeElement } = document;
+
+    if (editorElem === null) {
+      return;
+    }
+
+    const rootElement = editor.getRootElement();
+    if (
+      selection !== null &&
+      !nativeSelection.isCollapsed &&
+      rootElement !== null &&
+      rootElement.contains(nativeSelection.anchorNode)
+    ) {
+      const domRange = nativeSelection.getRangeAt(0);
+      let rect;
+      if (nativeSelection.anchorNode === rootElement) {
+        let inner = rootElement;
+        while (inner.firstElementChild != null) {
+          inner = inner.firstElementChild as HTMLElement;
+        }
+        rect = inner.getBoundingClientRect();
+      } else {
+        rect = domRange.getBoundingClientRect();
+      }
+
+      if (!mouseDownRef.current) {
+        positionEditorElement(editorElem, rect);
+      }
+      setLastSelection(selection);
+    } else if (!activeElement || activeElement.className !== "link-input") {
+      positionEditorElement(editorElem, null);
+      setLastSelection(null);
+      setEditMode(false);
+      setLinkUrl("");
+    }
+  }, [editor]);
+
+  useEffect(() => {
+    return mergeRegister(
+      editor.registerUpdateListener(({ editorState }) => {
+        editorState.read(() => {
+          updateLinkEditor();
+        });
+      }),
+
+      editor.registerCommand(
+        SELECTION_CHANGE_COMMAND,
+        () => {
+          updateLinkEditor();
+          return true;
+        },
+        LowPriority
+      )
+    );
+  }, [editor, updateLinkEditor]);
+
+  useEffect(() => {
+    editor.getEditorState().read(() => {
+      updateLinkEditor();
+    });
+  }, [editor, updateLinkEditor]);
+
+  useEffect(() => {
+    if (isEditMode && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditMode]);
+
+  return (
+    <div ref={editorRef} className="link-editor">
+      {isEditMode ? (
+        <input
+          ref={inputRef}
+          className="link-input"
+          value={linkUrl}
+          onChange={(event) => {
+            setLinkUrl(event.target.value);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              if (lastSelection !== null) {
+                if (linkUrl !== "") {
+                  editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
+                }
+                setEditMode(false);
+              }
+            } else if (event.key === "Escape") {
+              event.preventDefault();
+              setEditMode(false);
+            }
+          }}
+        />
+      ) : (
+        <div className="link-input">
+          <a href={linkUrl} target="_blank" rel="noopener noreferrer">
+            {linkUrl}
+          </a>
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/click-events-have-key-events */}
+          <div
+            className="link-edit"
+            role="button"
+            tabIndex={0}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => {
+              setEditMode(true);
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Select({
   onChange,
@@ -291,6 +473,7 @@ export default function ToolbarPlugin() {
 
   const [codeLanguage, setCodeLanguage] = useState("");
   const [, setIsRTL] = useState(false);
+  const [isLink, setIsLink] = useState(false);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
@@ -331,6 +514,15 @@ export default function ToolbarPlugin() {
       setIsStrikethrough(selection.hasFormat("strikethrough"));
       setIsCode(selection.hasFormat("code"));
       setIsRTL($isParentElementRTL(selection));
+
+      const node = getSelectedNode(selection);
+      const parent = node.getParent();
+
+      if ($isLinkNode(parent) || $isLinkNode(node)) {
+        setIsLink(true);
+      } else {
+        setIsLink(false);
+      }
     }
   }, [editor]);
 
@@ -382,6 +574,14 @@ export default function ToolbarPlugin() {
     },
     [editor, selectedElementKey]
   );
+
+  const insertLink = useCallback(() => {
+    if (!isLink) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
+    } else {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    }
+  }, [editor, isLink]);
 
   return (
     <div className="toolbar" ref={toolbarRef}>
@@ -498,6 +698,16 @@ export default function ToolbarPlugin() {
           >
             <span className="toolbar__icon icon__code" />
           </button>
+          <button
+            type="button"
+            onClick={insertLink}
+            className={isLink ? "toolbar__item--active" : "toolbar__item"}
+            aria-label="Insert Link"
+          >
+            <span className="toolbar__icon icon__link" />
+          </button>
+          {isLink &&
+            createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
         </>
       )}
     </div>

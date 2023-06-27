@@ -2,6 +2,7 @@ import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -13,6 +14,7 @@ import CodeHighlightPlugin from "./Plugins/CodeHighlightPlugin";
 import SidebarPlugin from "./Plugins/SidebarPlugin";
 import ToolbarPlugin from "./Plugins/ToolbarPlugin";
 import TreeViewPlugin from "./Plugins/TreeViewPlugin";
+import "./editor.css";
 
 function Placeholder() {
   return <div className="placeholder">Enter some text...</div>;
@@ -44,6 +46,7 @@ export default function Editor() {
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
         <ListPlugin />
+        <LinkPlugin />
         <TreeViewPlugin show={showDebugPanel} />
       </LexicalComposer>
     </div>

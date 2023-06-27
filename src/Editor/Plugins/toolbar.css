@@ -269,3 +269,7 @@
 .icon__type-strikethrough {
   background-image: url(icons/type-strikethrough.svg);
 }
+
+.icon__link {
+  background-image: url(icons/link.svg);
+}
