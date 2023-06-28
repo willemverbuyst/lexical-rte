@@ -1,54 +1,35 @@
 .link-editor {
   position: absolute;
-  z-index: 100;
-  top: -10000px;
-  left: -10000px;
-  margin-top: -6px;
-  max-width: 300px;
+  max-width: 20rem;
   width: 100%;
-  opacity: 0;
-  background-color: var(--bg-color);
   color: var(--txt-color);
+  background-color: var(--bg-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
   box-shadow: 2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
-  transition: opacity 0.5s;
 }
 
-.link-editor .link-input {
-  display: block;
-  width: calc(100% - 24px);
+.link-editor .link-editor__input {
+  width: calc(100% - 2rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
-  margin: 8px 12px;
-  padding: 8px 12px;
-  font-size: 15px;
-  background-color: var(--bg-color);
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  font-size: inherit;
+  font-family: inherit;
   color: var(--txt-color);
+  background-color: var(--bg-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
   box-shadow: -2px -2px 2px var(--bg-color-dark),
     2px 2px 2px var(--bg-color-light);
   outline: none;
-  position: relative;
-  font-family: inherit;
 }
 
-.link-editor div.link-edit {
-  background-image: url(icons/pencil-fill.svg);
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 35px;
-  vertical-align: -0.25em;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  cursor: pointer;
-}
-
-.link-editor .link-input a {
+.link-editor .link-editor__input a {
   color: var(--txt-color);
   text-decoration: none;
   display: block;
@@ -58,6 +39,27 @@
   text-overflow: ellipsis;
 }
 
-.link-editor .link-input a:hover {
+.link-editor .link-editor__input a:hover {
   text-decoration: underline;
+}
+
+.link-editor__button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.3rem;
+}
+
+.link-editor__icon {
+  height: 1.2rem;
+  width: 1.2rem;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  background-size: contain;
+}
+
+.icon__highlight {
+  background-image: url(icons/pencil-fill.svg);
 }

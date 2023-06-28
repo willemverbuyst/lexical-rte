@@ -202,7 +202,7 @@ function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
       {isEditMode ? (
         <input
           ref={inputRef}
-          className="link-input"
+          className="link-editor__input"
           value={linkUrl}
           onChange={(event) => {
             setLinkUrl(event.target.value);
@@ -223,20 +223,17 @@ function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
           }}
         />
       ) : (
-        <div className="link-input">
+        <div className="link-editor__input">
           <a href={linkUrl} target="_blank" rel="noopener noreferrer">
             {linkUrl}
           </a>
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/click-events-have-key-events */}
-          <div
-            className="link-edit"
-            role="button"
-            tabIndex={0}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={() => {
-              setEditMode(true);
-            }}
-          />
+          <button
+            type="button"
+            className="link-editor__button"
+            onClick={() => setEditMode(true)}
+          >
+            <span className="link-editor__icon icon__highlight" />
+          </button>
         </div>
       )}
     </div>
