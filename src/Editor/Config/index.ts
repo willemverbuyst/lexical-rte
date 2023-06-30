@@ -10,7 +10,7 @@ function onError(error: Error) {
 }
 
 const config = {
-  namespace: "PlainEditorTest",
+  namespace: "RTE",
   theme,
   onError,
   nodes: [
