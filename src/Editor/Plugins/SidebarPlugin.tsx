@@ -134,7 +134,6 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         type="button"
         className="sidebar__item"
         onClick={() => {
-          console.log("test :>> ");
           editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
           editor.focus();
         }}
