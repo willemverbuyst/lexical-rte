@@ -217,11 +217,10 @@ button {
 }
 
 .editor-text-code {
-  background-color: rgb(240, 242, 245);
-  color: #333;
-  padding: 1px 0.25rem;
+  background-color: var(--bg-color-dark);
   font-family: Menlo, Consolas, Monaco, monospace;
-  font-size: 94%;
+  padding: 1px 0.25rem;
+  font-size: 13px;
 }
 
 .editor-link {

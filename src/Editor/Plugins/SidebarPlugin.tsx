@@ -6,6 +6,7 @@ import {
   $getSelection,
   $insertNodes,
   $isRangeSelection,
+  CLEAR_EDITOR_COMMAND,
   TextNode,
 } from "lexical";
 import printJS from "print-js";
@@ -127,6 +128,19 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         title="debug editor"
       >
         <span className="sidebar__icon icon__bug" />
+      </button>
+
+      <button
+        type="button"
+        className="sidebar__item"
+        onClick={() => {
+          editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+          editor.focus();
+        }}
+        title="Clear"
+        aria-label="Clear editor contents"
+      >
+        <span className="sidebar__icon icon__trash" />
       </button>
     </div>
   );

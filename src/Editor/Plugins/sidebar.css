@@ -71,3 +71,7 @@
 .icon__bug {
   background-image: url(icons/bug.svg);
 }
+
+.icon__trash {
+  background-image: url(icons/trash.svg);
+}

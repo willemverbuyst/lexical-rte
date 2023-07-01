@@ -32,6 +32,7 @@ import {
   $isRangeSelection,
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
+  FORMAT_ELEMENT_COMMAND,
   FORMAT_TEXT_COMMAND,
   GridSelection,
   LexicalEditor,
@@ -705,6 +706,46 @@ export default function ToolbarPlugin() {
           </button>
           {isLink &&
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
+            }}
+            className="toolbar__item"
+            aria-label="Insert Code"
+          >
+            <span className="toolbar__icon icon__text-left" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
+            }}
+            className="toolbar__item"
+            aria-label="Insert Code"
+          >
+            <span className="toolbar__icon icon__text-center" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
+            }}
+            className="toolbar__item"
+            aria-label="Insert Code"
+          >
+            <span className="toolbar__icon icon__text-justify" />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
+            }}
+            className="toolbar__item"
+            aria-label="Insert Code"
+          >
+            <span className="toolbar__icon icon__text-right" />
+          </button>
         </>
       )}
     </div>
