@@ -20,8 +20,10 @@ import {
   $isHeadingNode,
 } from "@lexical/rich-text";
 import {
+  $getSelectionStyleValueForProperty,
   $isAtNodeEnd,
   $isParentElementRTL,
+  $patchStyleText,
   $wrapNodes,
 } from "@lexical/selection";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
@@ -456,6 +458,75 @@ function BlockOptionsDropdownList({
   );
 }
 
+function ColorPicker({
+  onChange,
+  toolbarRef,
+}: {
+  onChange: (color: string) => void;
+  toolbarRef: React.MutableRefObject<HTMLDivElement | null>;
+}) {
+  const colorPickerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const toolbar = toolbarRef.current;
+    const dropDown = colorPickerRef.current;
+
+    if (toolbar !== null && dropDown !== null) {
+      const { top, left } = toolbar.getBoundingClientRect();
+      dropDown.style.top = `${top + 40}px`;
+      dropDown.style.left = `${left + 460}px`;
+    }
+  }, [colorPickerRef, toolbarRef]);
+
+  const [colors, setColors] = useState({
+    "#cd9323": true,
+    "#1a53d8": false,
+    "#9a2151": false,
+    "#0d6416": false,
+    "#8d2808": false,
+  });
+
+  const handleSelectColor = (color: keyof typeof colors) => {
+    (Object.keys(colors) as Array<keyof typeof colors>).forEach((k) => {
+      colors[k] = k === color;
+    });
+
+    setColors({ ...colors });
+    onChange(color);
+  };
+
+  return (
+    <div className="color-picker" ref={colorPickerRef}>
+      <div className="picker__swatches">
+        {(Object.keys(colors) as Array<keyof typeof colors>).map(
+          (presetColor) => (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
+            <button
+              type="button"
+              key={presetColor}
+              className="picker__swatch"
+              style={{
+                background: presetColor,
+                transform: `scale(${colors[presetColor] ? 1.2 : 1})`,
+              }}
+              onClick={() => handleSelectColor(presetColor)}
+            />
+          )
+        )}
+      </div>
+      <div className="picker__reset">
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <button
+          type="button"
+          className="picker__swatch-reset"
+          onClick={() => onChange("transparent")}
+        />
+        <p className="picker__reset-text">no color</p>
+      </div>
+    </div>
+  );
+}
+
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
@@ -468,7 +539,11 @@ export default function ToolbarPlugin() {
   );
   const [showBlockOptionsDropDown, setShowBlockOptionsDropDown] =
     useState(false);
+  const [showBackgroundColorPicker, setShowBackgroundColorPicker] =
+    useState(false);
 
+  const [fontColor, setFontColor] = useState("#000");
+  const [bgColor, setBgColor] = useState("#fff");
   const [codeLanguage, setCodeLanguage] = useState("");
   const [, setIsRTL] = useState(false);
   const [isLink, setIsLink] = useState(false);
@@ -521,6 +596,17 @@ export default function ToolbarPlugin() {
       } else {
         setIsLink(false);
       }
+
+      setFontColor(
+        $getSelectionStyleValueForProperty(selection, "color", "#000")
+      );
+      setBgColor(
+        $getSelectionStyleValueForProperty(
+          selection,
+          "background-color",
+          "#fff"
+        )
+      );
     }
   }, [editor]);
 
@@ -580,6 +666,32 @@ export default function ToolbarPlugin() {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     }
   }, [editor, isLink]);
+
+  const applyStyleText = useCallback(
+    (styles: Record<string, string>) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, styles);
+        }
+      });
+    },
+    [editor]
+  );
+
+  const onFontColorSelect = useCallback(
+    (value: string) => {
+      applyStyleText({ color: value });
+    },
+    [applyStyleText]
+  );
+
+  const onBgColorSelect = useCallback(
+    (value: string) => {
+      applyStyleText({ "background-color": value });
+    },
+    [applyStyleText]
+  );
 
   return (
     <div className="toolbar" ref={toolbarRef}>
@@ -706,6 +818,31 @@ export default function ToolbarPlugin() {
           </button>
           {isLink &&
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
+
+          <button
+            type="button"
+            onClick={() => {
+              setShowBackgroundColorPicker(!showBackgroundColorPicker);
+            }}
+            className={
+              showBackgroundColorPicker
+                ? "toolbar__item--active"
+                : "toolbar__item"
+            }
+            aria-label="Formatting background color"
+          >
+            <span className="toolbar__icon icon__paint-bucket" />
+          </button>
+          <div style={{ position: "absolute" }}>
+            {showBackgroundColorPicker &&
+              createPortal(
+                <ColorPicker
+                  onChange={onBgColorSelect}
+                  toolbarRef={toolbarRef}
+                />,
+                document.body
+              )}
+          </div>
           <button
             type="button"
             onClick={() => {

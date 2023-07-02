@@ -30,6 +30,62 @@
     1px 1px 1px var(--bg-color-light);
 }
 
+.color-picker {
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  box-shadow: 2px 2px 2px var(--bg-color-dark),
+    -2px -2px 2px var(--bg-color-light);
+}
+
+.picker__swatches {
+  display: flex;
+  padding: 12px;
+}
+
+.picker__reset {
+  display: flex;
+  padding: 12px;
+  align-items: center;
+}
+
+.picker__reset-text {
+  margin-left: 5px;
+}
+
+.picker__swatch {
+  width: 1.5rem;
+  height: 1.6rem;
+  margin: 4px;
+  border: none;
+  padding: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  color: var(--txt-color);
+}
+
+.picker__swatch-reset {
+  width: 1.5rem;
+  height: 1.6rem;
+  margin: 4px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  background: var(--bg-color);
+  color: var(--txt-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px var(--bg-color-dark),
+    -2px -2px 2px var(--bg-color-light);
+}
+
 .toolbar__item--active {
   height: 2.5rem;
   width: 3rem;
@@ -286,4 +342,8 @@
 }
 .icon__text-justify {
   background-image: url(icons/justify.svg);
+}
+
+.icon__paint-bucket {
+  background-image: url(icons/paint-bucket.svg);
 }

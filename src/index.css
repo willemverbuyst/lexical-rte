@@ -25,6 +25,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
   color: var(--txt-color);
+  min-height: 100vh;
 }
 
 button {
