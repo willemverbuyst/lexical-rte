@@ -287,3 +287,39 @@
 .icon__text-justify {
   background-image: url(icons/justify.svg);
 }
+
+.toolbar__item-btn-group {
+  height: 2.5rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color);
+  color: var(--txt-color);
+}
+
+.toolbar__item-btn-group--left {
+  margin: 0.3rem;
+  margin-right: 0;
+  border: 1px solid var(--bg-color);
+  border-radius: 7px 0 0 7px;
+  box-shadow: 2px 2px 2px var(--bg-color-dark),
+    -2px -2px 2px var(--bg-color-light);
+}
+
+.toolbar__item-btn-group--middle {
+  margin: 0.3rem 0;
+  border: 1px solid var(--bg-color);
+  border-radius: 0 0 0 0;
+  box-shadow: 2px 2px 2px var(--bg-color-dark),
+    -2px -2px 2px var(--bg-color-light);
+}
+
+.toolbar__item-btn-group--right {
+  margin: 0.3rem;
+  margin-left: 0;
+  border: 1px solid var(--bg-color);
+  border-radius: 0 7px 7px 0;
+  box-shadow: 2px 2px 2px var(--bg-color-dark),
+    -2px -2px 2px var(--bg-color-light);
+}
