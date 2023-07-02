@@ -97,7 +97,7 @@ button {
 }
 
 .editor-input {
-  width: 60rem;
+  width: 50rem;
   min-height: 20rem;
   padding: 0 1rem;
   border: 2px solid var(--bg-color);
