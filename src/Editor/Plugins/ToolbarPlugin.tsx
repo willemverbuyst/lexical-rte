@@ -461,9 +461,11 @@ function BlockOptionsDropdownList({
 function ColorPicker({
   onChange,
   toolbarRef,
+  close,
 }: {
   onChange: (color: string) => void;
   toolbarRef: React.MutableRefObject<HTMLDivElement | null>;
+  close: () => void;
 }) {
   const colorPickerRef = useRef<HTMLDivElement | null>(null);
 
@@ -479,11 +481,12 @@ function ColorPicker({
   }, [colorPickerRef, toolbarRef]);
 
   const [colors, setColors] = useState({
-    "#cd9323": true,
+    "#cd9323": false,
     "#1a53d8": false,
     "#9a2151": false,
     "#0d6416": false,
     "#8d2808": false,
+    transparent: true,
   });
 
   const handleSelectColor = (color: keyof typeof colors) => {
@@ -498,8 +501,9 @@ function ColorPicker({
   return (
     <div className="color-picker" ref={colorPickerRef}>
       <div className="picker__swatches">
-        {(Object.keys(colors) as Array<keyof typeof colors>).map(
-          (presetColor) => (
+        {(Object.keys(colors) as Array<keyof typeof colors>)
+          .slice(0, -1)
+          .map((presetColor) => (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               type="button"
@@ -511,17 +515,19 @@ function ColorPicker({
               }}
               onClick={() => handleSelectColor(presetColor)}
             />
-          )
-        )}
+          ))}
       </div>
       <div className="picker__reset">
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button
           type="button"
-          className="picker__swatch-reset"
-          onClick={() => onChange("transparent")}
-        />
-        <p className="picker__reset-text">no color</p>
+          className="picker__action-btn"
+          onClick={() => handleSelectColor("transparent")}
+        >
+          clear
+        </button>
+        <button type="button" className="picker__action-btn" onClick={close}>
+          ok
+        </button>
       </div>
     </div>
   );
@@ -693,6 +699,10 @@ export default function ToolbarPlugin() {
     [applyStyleText]
   );
 
+  const closeBgColorSelect = () => {
+    setShowBackgroundColorPicker(false);
+  };
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -839,6 +849,7 @@ export default function ToolbarPlugin() {
                 <ColorPicker
                   onChange={onBgColorSelect}
                   toolbarRef={toolbarRef}
+                  close={closeBgColorSelect}
                 />,
                 document.body
               )}
