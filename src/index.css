@@ -25,6 +25,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
   color: var(--txt-color);
+  min-height: 100vh;
 }
 
 button {
@@ -90,14 +91,14 @@ button {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 5rem;
-  grid-template-rows: 3rem 1fr;
+  grid-template-rows: 3.3rem 1fr;
   grid-template-areas:
     "toolbar toolbar"
     "editor sidebar";
 }
 
 .editor-input {
-  width: 50rem;
+  width: 55rem;
   min-height: 20rem;
   padding: 0 1rem;
   border: 2px solid var(--bg-color);
@@ -110,7 +111,7 @@ button {
 
 .placeholder {
   position: absolute;
-  top: 4rem;
+  top: 4.3rem;
   left: 1rem;
   color: var(--txt-color-placeholder);
 }
