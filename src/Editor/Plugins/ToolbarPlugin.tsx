@@ -20,8 +20,10 @@ import {
   $isHeadingNode,
 } from "@lexical/rich-text";
 import {
+  $getSelectionStyleValueForProperty,
   $isAtNodeEnd,
   $isParentElementRTL,
+  $patchStyleText,
   $wrapNodes,
 } from "@lexical/selection";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
@@ -456,6 +458,81 @@ function BlockOptionsDropdownList({
   );
 }
 
+function ColorPicker({
+  onChange,
+  toolbarRef,
+  close,
+}: {
+  onChange: (color: string) => void;
+  toolbarRef: React.MutableRefObject<HTMLDivElement | null>;
+  close: () => void;
+}) {
+  const colorPickerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const toolbar = toolbarRef.current;
+    const dropDown = colorPickerRef.current;
+
+    if (toolbar !== null && dropDown !== null) {
+      const { top, left } = toolbar.getBoundingClientRect();
+      dropDown.style.top = `${top + 40}px`;
+      dropDown.style.left = `${left + 460}px`;
+    }
+  }, [colorPickerRef, toolbarRef]);
+
+  const [colors, setColors] = useState({
+    "#cd9323": false,
+    "#1a53d8": false,
+    "#9a2151": false,
+    "#0d6416": false,
+    "#8d2808": false,
+    transparent: true,
+  });
+
+  const handleSelectColor = (color: keyof typeof colors) => {
+    (Object.keys(colors) as Array<keyof typeof colors>).forEach((k) => {
+      colors[k] = k === color;
+    });
+
+    setColors({ ...colors });
+    onChange(color);
+  };
+
+  return (
+    <div className="color-picker" ref={colorPickerRef}>
+      <div className="picker__swatches">
+        {(Object.keys(colors) as Array<keyof typeof colors>)
+          .slice(0, -1)
+          .map((presetColor) => (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
+            <button
+              type="button"
+              key={presetColor}
+              className="picker__swatch"
+              style={{
+                background: presetColor,
+                transform: `scale(${colors[presetColor] ? 1.2 : 1})`,
+              }}
+              onClick={() => handleSelectColor(presetColor)}
+            />
+          ))}
+      </div>
+      <div className="picker__reset">
+        <button
+          type="button"
+          className="picker__action-btn"
+          onClick={() => handleSelectColor("transparent")}
+        >
+          clear
+        </button>
+        <button type="button" className="picker__action-btn" onClick={close}>
+          ok
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
@@ -468,7 +545,12 @@ export default function ToolbarPlugin() {
   );
   const [showBlockOptionsDropDown, setShowBlockOptionsDropDown] =
     useState(false);
+  const [showBackgroundColorPicker, setShowBackgroundColorPicker] =
+    useState(false);
+  const [showFontColorPicker, setShowFontColorPicker] = useState(false);
 
+  const [, setFontColor] = useState("#000");
+  const [, setBgColor] = useState("transparent");
   const [codeLanguage, setCodeLanguage] = useState("");
   const [, setIsRTL] = useState(false);
   const [isLink, setIsLink] = useState(false);
@@ -521,6 +603,17 @@ export default function ToolbarPlugin() {
       } else {
         setIsLink(false);
       }
+
+      setFontColor(
+        $getSelectionStyleValueForProperty(selection, "color", "#000")
+      );
+      setBgColor(
+        $getSelectionStyleValueForProperty(
+          selection,
+          "background-color",
+          "transparent"
+        )
+      );
     }
   }, [editor]);
 
@@ -581,6 +674,40 @@ export default function ToolbarPlugin() {
     }
   }, [editor, isLink]);
 
+  const applyStyleText = useCallback(
+    (styles: Record<string, string>) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, styles);
+        }
+      });
+    },
+    [editor]
+  );
+
+  const onFontColorSelect = useCallback(
+    (value: string) => {
+      applyStyleText({ color: value });
+    },
+    [applyStyleText]
+  );
+
+  const onBgColorSelect = useCallback(
+    (value: string) => {
+      applyStyleText({ "background-color": value });
+    },
+    [applyStyleText]
+  );
+
+  const closeBgColorSelect = () => {
+    setShowBackgroundColorPicker(false);
+  };
+
+  const closeFontColorSelect = () => {
+    setShowFontColorPicker(false);
+  };
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -590,7 +717,7 @@ export default function ToolbarPlugin() {
           editor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
         aria-label="Undo"
-        className="toolbar__item"
+        className="toolbar__item-btn-group toolbar__item-btn-group-left"
       >
         <span className="toolbar__icon icon__undo-button" />
       </button>
@@ -601,7 +728,7 @@ export default function ToolbarPlugin() {
           editor.dispatchCommand(REDO_COMMAND, undefined);
         }}
         aria-label="Redo"
-        className="toolbar__item"
+        className="toolbar__item-btn-group toolbar__item-btn-group-right"
       >
         <span className="toolbar__icon icon__redo-button" />
       </button>
@@ -649,7 +776,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
             }}
-            className={isBold ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isBold
+                ? "toolbar__item-btn-group toolbar__item-btn-group-left toolbar__item-btn-group-left--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-left"
+            }
             aria-label="Format Bold"
           >
             <span className="toolbar__icon icon__type-bold" />
@@ -659,7 +790,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
             }}
-            className={isItalic ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isItalic
+                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+            }
             aria-label="Format Italics"
           >
             <span className="toolbar__icon icon__type-italic" />
@@ -669,7 +804,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
             }}
-            className={isUnderline ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isUnderline
+                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+            }
             aria-label="Format Underline"
           >
             <span className="toolbar__icon icon__type-underline" />
@@ -680,7 +819,9 @@ export default function ToolbarPlugin() {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
             }}
             className={
-              isStrikethrough ? "toolbar__item--active" : "toolbar__item"
+              isStrikethrough
+                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
             }
             aria-label="Format Strikethrough"
           >
@@ -691,7 +832,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
             }}
-            className={isCode ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isCode
+                ? "toolbar__item-btn-group toolbar__item-btn-group-right toolbar__item-btn-group-right--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-right"
+            }
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__code" />
@@ -709,9 +854,53 @@ export default function ToolbarPlugin() {
           <button
             type="button"
             onClick={() => {
+              setShowBackgroundColorPicker(!showBackgroundColorPicker);
+            }}
+            className={
+              showBackgroundColorPicker
+                ? "toolbar__item--active"
+                : "toolbar__item"
+            }
+            aria-label="Formatting background color"
+          >
+            <span className="toolbar__icon icon__paint-bucket" />
+          </button>
+          {showBackgroundColorPicker &&
+            createPortal(
+              <ColorPicker
+                onChange={onBgColorSelect}
+                toolbarRef={toolbarRef}
+                close={closeBgColorSelect}
+              />,
+              document.body
+            )}
+          <button
+            type="button"
+            onClick={() => {
+              setShowFontColorPicker(!showFontColorPicker);
+            }}
+            className={
+              showFontColorPicker ? "toolbar__item--active" : "toolbar__item"
+            }
+            aria-label="Formatting background color"
+          >
+            <span className="toolbar__icon icon__pencil-fill" />
+          </button>
+          {showFontColorPicker &&
+            createPortal(
+              <ColorPicker
+                onChange={onFontColorSelect}
+                toolbarRef={toolbarRef}
+                close={closeFontColorSelect}
+              />,
+              document.body
+            )}
+          <button
+            type="button"
+            onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-left"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-left" />
@@ -721,7 +910,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-middle"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-center" />
@@ -731,7 +920,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-middle"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-justify" />
@@ -741,7 +930,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-right"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-right" />
