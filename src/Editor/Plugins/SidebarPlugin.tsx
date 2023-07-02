@@ -1,11 +1,10 @@
 import { $generateHtmlFromNodes } from "@lexical/html";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $patchStyleText } from "@lexical/selection";
 import { Document, Page, pdf } from "@react-pdf/renderer";
 import {
   $getSelection,
   $insertNodes,
-  $isRangeSelection,
+  CLEAR_EDITOR_COMMAND,
   TextNode,
 } from "lexical";
 import printJS from "print-js";
@@ -31,11 +30,9 @@ interface Props {
 
 export default function SidebarPlugin({ handleClick, show }: Props) {
   const [editor] = useLexicalComposerContext();
-  const [highlightActive, setHighlightActive] = useState(false);
   const [debugActive, setDebugActive] = useState(show);
 
   const date = new Date();
-  const color = "#f8ff00";
 
   const handleDateTimeClick = () => {
     editor.update(() => {
@@ -47,20 +44,6 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         selection.insertNodes(nodes);
       } else {
         $insertNodes(nodes);
-      }
-    });
-  };
-
-  const handleHighlightClick = () => {
-    const newActiveState = !highlightActive;
-    setHighlightActive(newActiveState);
-
-    editor.update(() => {
-      const selection = $getSelection();
-      if ($isRangeSelection(selection)) {
-        $patchStyleText(selection, {
-          "background-color": newActiveState ? color : "none",
-        });
       }
     });
   };
@@ -101,16 +84,6 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
 
       <button
         type="button"
-        aria-label="highlight selection"
-        title="highlight selection"
-        onClick={handleHighlightClick}
-        className={highlightActive ? "sidebar__item--active" : "sidebar__item"}
-      >
-        <span className="sidebar__icon icon__highlight" />
-      </button>
-
-      <button
-        type="button"
         onClick={handlePrintClick}
         className="sidebar__item"
         aria-label="Export file"
@@ -127,6 +100,19 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         title="debug editor"
       >
         <span className="sidebar__icon icon__bug" />
+      </button>
+
+      <button
+        type="button"
+        className="sidebar__item"
+        onClick={() => {
+          editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+          editor.focus();
+        }}
+        title="Clear"
+        aria-label="Clear editor contents"
+      >
+        <span className="sidebar__icon icon__trash" />
       </button>
     </div>
   );
