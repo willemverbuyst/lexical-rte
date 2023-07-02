@@ -15,7 +15,6 @@ import CodeHighlightPlugin from "./Plugins/CodeHighlightPlugin";
 import SidebarPlugin from "./Plugins/SidebarPlugin";
 import ToolbarPlugin from "./Plugins/ToolbarPlugin";
 import TreeViewPlugin from "./Plugins/TreeViewPlugin";
-import "./editor.css";
 
 function Placeholder() {
   return <div className="placeholder">Enter some text...</div>;

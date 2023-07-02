@@ -46,7 +46,6 @@ import {
 } from "lexical";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import "./toolbar.css";
 
 const LowPriority = 1;
 
@@ -396,13 +395,13 @@ function BlockOptionsDropdownList({
   };
 
   return (
-    <div className="dropdown" ref={dropDownRef}>
+    <div className="toolbar-item__dropdown-options" ref={dropDownRef}>
       <button
         type="button"
         className="dropdown__item"
         onClick={formatParagraph}
       >
-        <span className="dropdown__icon icon__paragraph" />
+        <span className="dropdown__item-icon icon__paragraph" />
         <span className="dropdown__item-text">Normal</span>
         {blockType === "paragraph" && (
           <span className="dropdown__item--active" />
@@ -413,7 +412,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatLargeHeading}
       >
-        <span className="dropdown__icon icon__large-heading" />
+        <span className="dropdown__item-icon icon__large-heading" />
         <span className="dropdown__item-text">Large Heading</span>
         {blockType === "h1" && <span className="dropdown__item--active" />}
       </button>
@@ -422,7 +421,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatSmallHeading}
       >
-        <span className="dropdown__icon icon__small-heading" />
+        <span className="dropdown__item-icon icon__small-heading" />
         <span className="dropdown__item-text">Small Heading</span>
         {blockType === "h2" && <span className="dropdown__item--active" />}
       </button>
@@ -431,7 +430,7 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatBulletList}
       >
-        <span className="dropdown__icon icon__bullet-list" />
+        <span className="dropdown__item-icon icon__bullet-list" />
         <span className="dropdown__item-text">Bullet List</span>
         {blockType === "ul" && <span className="dropdown__item--active" />}
       </button>
@@ -440,17 +439,17 @@ function BlockOptionsDropdownList({
         className="dropdown__item"
         onClick={formatNumberedList}
       >
-        <span className="dropdown__icon icon__numbered-list" />
+        <span className="dropdown__item-icon icon__numbered-list" />
         <span className="dropdown__item-text">Numbered List</span>
         {blockType === "ol" && <span className="dropdown__item--active" />}
       </button>
       <button type="button" className="dropdown__item" onClick={formatQuote}>
-        <span className="dropdown__icon icon__quote" />
+        <span className="dropdown__item-icon icon__quote" />
         <span className="dropdown__item-text">Quote</span>
         {blockType === "quote" && <span className="dropdown__item--active" />}
       </button>
       <button type="button" className="dropdown__item" onClick={formatCode}>
-        <span className=" dropdown__icon icon__code" />
+        <span className=" dropdown__item-icon icon__code" />
         <span className="dropdown__item-text">Code Block</span>
         {blockType === "code" && <span className="dropdown__item--active" />}
       </button>
@@ -717,7 +716,7 @@ export default function ToolbarPlugin() {
           editor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
         aria-label="Undo"
-        className="toolbar__item-btn-group toolbar__item-btn-group-left"
+        className="toolbar-item toolbar-item__btn-group toolbar-item__btn-group-left"
       >
         <span className="toolbar__icon icon__undo-button" />
       </button>
@@ -728,46 +727,44 @@ export default function ToolbarPlugin() {
           editor.dispatchCommand(REDO_COMMAND, undefined);
         }}
         aria-label="Redo"
-        className="toolbar__item-btn-group toolbar__item-btn-group-right"
+        className="toolbar-item toolbar-item__btn-group toolbar-item__btn-group-right"
       >
         <span className="toolbar__icon icon__redo-button" />
       </button>
 
       {supportedBlockTypes.has(blockType) && (
-        <div className="toolbar__dropdown">
-          <button
-            type="button"
-            onClick={() =>
-              setShowBlockOptionsDropDown(!showBlockOptionsDropDown)
-            }
-            aria-label="Formatting Options"
-          >
-            <span className={`toolbar__icon icon__${blockType}`} />
-            <span className="toolbar__dropdown-text">
-              {blockTypeToBlockName[blockType]}
-            </span>
-            <span className="toolbar__dropdown-chevron icon__chevron-down" />
-          </button>
-          {showBlockOptionsDropDown &&
-            createPortal(
-              <BlockOptionsDropdownList
-                editor={editor}
-                blockType={blockType}
-                toolbarRef={toolbarRef}
-                setShowBlockOptionsDropDown={setShowBlockOptionsDropDown}
-              />,
-              document.body
-            )}
-        </div>
+        <button
+          type="button"
+          onClick={() => setShowBlockOptionsDropDown(!showBlockOptionsDropDown)}
+          aria-label="Formatting Options"
+          className="toolbar-item toolbar-item__dropdown"
+        >
+          <span className={`toolbar__icon icon__${blockType}`} />
+          <span className="toolbar-item__dropdown-text">
+            {blockTypeToBlockName[blockType]}
+          </span>
+          <span className="toolbar-item__dropdown-chevron icon__chevron-down" />
+        </button>
       )}
+      {showBlockOptionsDropDown &&
+        createPortal(
+          <BlockOptionsDropdownList
+            editor={editor}
+            blockType={blockType}
+            toolbarRef={toolbarRef}
+            setShowBlockOptionsDropDown={setShowBlockOptionsDropDown}
+          />,
+          document.body
+        )}
+
       {blockType === "code" ? (
-        <div className="toolbar__select">
+        <div className="toolbar-item toolbar-item__select">
           <Select
             onChange={onCodeLanguageSelect}
             options={codeLanguges}
             value={codeLanguage}
           />
-          <span className="toolbar__select-chevron icon__chevron-down" />
+          <span className="toolbar-item__select-chevron icon__chevron-down" />
         </div>
       ) : (
         <>
@@ -778,8 +775,8 @@ export default function ToolbarPlugin() {
             }}
             className={
               isBold
-                ? "toolbar__item-btn-group toolbar__item-btn-group-left toolbar__item-btn-group-left--active"
-                : "toolbar__item-btn-group toolbar__item-btn-group-left"
+                ? "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-left toolbar-item__btn-group-left--active"
+                : "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-left"
             }
             aria-label="Format Bold"
           >
@@ -792,8 +789,8 @@ export default function ToolbarPlugin() {
             }}
             className={
               isItalic
-                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
-                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+                ? "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle toolbar-item__btn-group-middle--active"
+                : "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle"
             }
             aria-label="Format Italics"
           >
@@ -806,8 +803,8 @@ export default function ToolbarPlugin() {
             }}
             className={
               isUnderline
-                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
-                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+                ? "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle toolbar-item__btn-group-middle--active"
+                : "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle"
             }
             aria-label="Format Underline"
           >
@@ -820,8 +817,8 @@ export default function ToolbarPlugin() {
             }}
             className={
               isStrikethrough
-                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
-                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+                ? "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle toolbar-item__btn-group-middle--active"
+                : "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle"
             }
             aria-label="Format Strikethrough"
           >
@@ -834,8 +831,8 @@ export default function ToolbarPlugin() {
             }}
             className={
               isCode
-                ? "toolbar__item-btn-group toolbar__item-btn-group-right toolbar__item-btn-group-right--active"
-                : "toolbar__item-btn-group toolbar__item-btn-group-right"
+                ? "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-right toolbar-item__btn-group-right--active"
+                : "toolbar-item toolbar-item__btn-group toolbar-item__btn-group-right"
             }
             aria-label="Insert Code"
           >
@@ -844,7 +841,11 @@ export default function ToolbarPlugin() {
           <button
             type="button"
             onClick={insertLink}
-            className={isLink ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isLink
+                ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
+                : "toolbar-item toolbar-item__btn"
+            }
             aria-label="Insert Link"
           >
             <span className="toolbar__icon icon__link" />
@@ -858,8 +859,8 @@ export default function ToolbarPlugin() {
             }}
             className={
               showBackgroundColorPicker
-                ? "toolbar__item--active"
-                : "toolbar__item"
+                ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
+                : "toolbar-item toolbar-item__btn"
             }
             aria-label="Formatting background color"
           >
@@ -880,7 +881,9 @@ export default function ToolbarPlugin() {
               setShowFontColorPicker(!showFontColorPicker);
             }}
             className={
-              showFontColorPicker ? "toolbar__item--active" : "toolbar__item"
+              showFontColorPicker
+                ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
+                : "toolbar-item toolbar-item__btn"
             }
             aria-label="Formatting background color"
           >
@@ -900,7 +903,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
             }}
-            className="toolbar__item-btn-group toolbar__item-btn-group-left"
+            className="toolbar-item toolbar-item__btn-group toolbar-item__btn-group-left"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-left" />
@@ -910,7 +913,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
             }}
-            className="toolbar__item-btn-group toolbar__item-btn-group-middle"
+            className="toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-center" />
@@ -920,7 +923,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
             }}
-            className="toolbar__item-btn-group toolbar__item-btn-group-middle"
+            className="toolbar-item toolbar-item__btn-group toolbar-item__btn-group-middle"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-justify" />
@@ -930,7 +933,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
             }}
-            className="toolbar__item-btn-group toolbar__item-btn-group-right"
+            className="toolbar-item toolbar-item__btn-group toolbar-item__btn-group-right"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-right" />

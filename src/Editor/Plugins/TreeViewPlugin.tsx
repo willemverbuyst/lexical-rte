@@ -1,6 +1,5 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { TreeView } from "@lexical/react/LexicalTreeView";
-import "./treeview.css";
 
 interface Props {
   show: boolean;
