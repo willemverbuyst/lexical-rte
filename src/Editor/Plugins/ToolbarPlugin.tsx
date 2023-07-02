@@ -547,9 +547,10 @@ export default function ToolbarPlugin() {
     useState(false);
   const [showBackgroundColorPicker, setShowBackgroundColorPicker] =
     useState(false);
+  const [showFontColorPicker, setShowFontColorPicker] = useState(false);
 
-  const [fontColor, setFontColor] = useState("#000");
-  const [bgColor, setBgColor] = useState("#fff");
+  const [, setFontColor] = useState("#000");
+  const [, setBgColor] = useState("transparent");
   const [codeLanguage, setCodeLanguage] = useState("");
   const [, setIsRTL] = useState(false);
   const [isLink, setIsLink] = useState(false);
@@ -610,7 +611,7 @@ export default function ToolbarPlugin() {
         $getSelectionStyleValueForProperty(
           selection,
           "background-color",
-          "#fff"
+          "transparent"
         )
       );
     }
@@ -701,6 +702,10 @@ export default function ToolbarPlugin() {
 
   const closeBgColorSelect = () => {
     setShowBackgroundColorPicker(false);
+  };
+
+  const closeFontColorSelect = () => {
+    setShowFontColorPicker(false);
   };
 
   return (
@@ -828,7 +833,6 @@ export default function ToolbarPlugin() {
           </button>
           {isLink &&
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
-
           <button
             type="button"
             onClick={() => {
@@ -843,17 +847,36 @@ export default function ToolbarPlugin() {
           >
             <span className="toolbar__icon icon__paint-bucket" />
           </button>
-          <div style={{ position: "absolute" }}>
-            {showBackgroundColorPicker &&
-              createPortal(
-                <ColorPicker
-                  onChange={onBgColorSelect}
-                  toolbarRef={toolbarRef}
-                  close={closeBgColorSelect}
-                />,
-                document.body
-              )}
-          </div>
+          {showBackgroundColorPicker &&
+            createPortal(
+              <ColorPicker
+                onChange={onBgColorSelect}
+                toolbarRef={toolbarRef}
+                close={closeBgColorSelect}
+              />,
+              document.body
+            )}
+          <button
+            type="button"
+            onClick={() => {
+              setShowFontColorPicker(!showFontColorPicker);
+            }}
+            className={
+              showFontColorPicker ? "toolbar__item--active" : "toolbar__item"
+            }
+            aria-label="Formatting background color"
+          >
+            <span className="toolbar__icon icon__pencil-fill" />
+          </button>
+          {showFontColorPicker &&
+            createPortal(
+              <ColorPicker
+                onChange={onFontColorSelect}
+                toolbarRef={toolbarRef}
+                close={closeFontColorSelect}
+              />,
+              document.body
+            )}
           <button
             type="button"
             onClick={() => {

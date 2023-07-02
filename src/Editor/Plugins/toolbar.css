@@ -342,3 +342,7 @@
 .icon__paint-bucket {
   background-image: url(icons/paint-bucket.svg);
 }
+
+.icon__pencil-fill {
+  background-image: url(icons/pencil-fill.svg);
+}
