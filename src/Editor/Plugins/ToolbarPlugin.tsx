@@ -717,7 +717,7 @@ export default function ToolbarPlugin() {
           editor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
         aria-label="Undo"
-        className="toolbar__item"
+        className="toolbar__item-btn-group toolbar__item-btn-group-left"
       >
         <span className="toolbar__icon icon__undo-button" />
       </button>
@@ -728,7 +728,7 @@ export default function ToolbarPlugin() {
           editor.dispatchCommand(REDO_COMMAND, undefined);
         }}
         aria-label="Redo"
-        className="toolbar__item"
+        className="toolbar__item-btn-group toolbar__item-btn-group-right"
       >
         <span className="toolbar__icon icon__redo-button" />
       </button>
@@ -776,7 +776,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
             }}
-            className={isBold ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isBold
+                ? "toolbar__item-btn-group toolbar__item-btn-group-left toolbar__item-btn-group-left--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-left"
+            }
             aria-label="Format Bold"
           >
             <span className="toolbar__icon icon__type-bold" />
@@ -786,7 +790,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
             }}
-            className={isItalic ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isItalic
+                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+            }
             aria-label="Format Italics"
           >
             <span className="toolbar__icon icon__type-italic" />
@@ -796,7 +804,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
             }}
-            className={isUnderline ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isUnderline
+                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
+            }
             aria-label="Format Underline"
           >
             <span className="toolbar__icon icon__type-underline" />
@@ -807,7 +819,9 @@ export default function ToolbarPlugin() {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
             }}
             className={
-              isStrikethrough ? "toolbar__item--active" : "toolbar__item"
+              isStrikethrough
+                ? "toolbar__item-btn-group toolbar__item-btn-group-middle toolbar__item-btn-group-middle--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-middle"
             }
             aria-label="Format Strikethrough"
           >
@@ -818,7 +832,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
             }}
-            className={isCode ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isCode
+                ? "toolbar__item-btn-group toolbar__item-btn-group-right toolbar__item-btn-group-right--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group-right"
+            }
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__code" />
@@ -882,7 +900,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-left"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-left" />
@@ -892,7 +910,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-middle"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-center" />
@@ -902,7 +920,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-middle"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-justify" />
@@ -912,7 +930,7 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
             }}
-            className="toolbar__item"
+            className="toolbar__item-btn-group toolbar__item-btn-group-right"
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__text-right" />
