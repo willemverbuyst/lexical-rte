@@ -649,7 +649,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
             }}
-            className={isBold ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isBold
+                ? "toolbar__item--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group--left"
+            }
             aria-label="Format Bold"
           >
             <span className="toolbar__icon icon__type-bold" />
@@ -659,7 +663,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
             }}
-            className={isItalic ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isItalic
+                ? "toolbar__item--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group--middle"
+            }
             aria-label="Format Italics"
           >
             <span className="toolbar__icon icon__type-italic" />
@@ -669,7 +677,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
             }}
-            className={isUnderline ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isUnderline
+                ? "toolbar__item--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group--middle"
+            }
             aria-label="Format Underline"
           >
             <span className="toolbar__icon icon__type-underline" />
@@ -680,7 +692,9 @@ export default function ToolbarPlugin() {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
             }}
             className={
-              isStrikethrough ? "toolbar__item--active" : "toolbar__item"
+              isStrikethrough
+                ? "toolbar__item--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group--middle"
             }
             aria-label="Format Strikethrough"
           >
@@ -691,7 +705,11 @@ export default function ToolbarPlugin() {
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
             }}
-            className={isCode ? "toolbar__item--active" : "toolbar__item"}
+            className={
+              isCode
+                ? "toolbar__item--active"
+                : "toolbar__item-btn-group toolbar__item-btn-group--right"
+            }
             aria-label="Insert Code"
           >
             <span className="toolbar__icon icon__code" />
