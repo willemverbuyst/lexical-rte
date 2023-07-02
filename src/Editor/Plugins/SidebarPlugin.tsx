@@ -11,7 +11,6 @@ import printJS from "print-js";
 import { useState } from "react";
 import Html from "react-pdf-html";
 import { DateTimeNode } from "../Nodes/DateTimeNode";
-import "./sidebar.css";
 
 function CreateDocument({ html }: { html: string }) {
   return (
@@ -77,7 +76,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         aria-label="insert date and time"
         title="insert date and time"
         onClick={handleDateTimeClick}
-        className="sidebar__item"
+        className="sidebar-item sidebar-item__btn"
       >
         <span className="sidebar__icon icon__clock" />
       </button>
@@ -85,7 +84,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
       <button
         type="button"
         onClick={handlePrintClick}
-        className="sidebar__item"
+        className="sidebar-item sidebar-item__btn"
         aria-label="Export file"
         title="export file"
       >
@@ -95,7 +94,11 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
       <button
         type="button"
         onClick={handleDebugClick}
-        className={debugActive ? "sidebar__item--active" : "sidebar__item"}
+        className={
+          debugActive
+            ? "sidebar-item sidebar-item__btn sidebar-item__btn--active"
+            : "sidebar-item sidebar-item__btn"
+        }
         aria-label="Debug editor"
         title="debug editor"
       >
@@ -104,7 +107,7 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
 
       <button
         type="button"
-        className="sidebar__item"
+        className="sidebar-item sidebar-item__btn"
         onClick={() => {
           editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
           editor.focus();
