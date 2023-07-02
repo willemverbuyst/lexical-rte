@@ -1,11 +1,9 @@
 import { $generateHtmlFromNodes } from "@lexical/html";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $patchStyleText } from "@lexical/selection";
 import { Document, Page, pdf } from "@react-pdf/renderer";
 import {
   $getSelection,
   $insertNodes,
-  $isRangeSelection,
   CLEAR_EDITOR_COMMAND,
   TextNode,
 } from "lexical";
@@ -32,11 +30,9 @@ interface Props {
 
 export default function SidebarPlugin({ handleClick, show }: Props) {
   const [editor] = useLexicalComposerContext();
-  const [highlightActive, setHighlightActive] = useState(false);
   const [debugActive, setDebugActive] = useState(show);
 
   const date = new Date();
-  const color = "#f8ff00";
 
   const handleDateTimeClick = () => {
     editor.update(() => {
@@ -48,20 +44,6 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         selection.insertNodes(nodes);
       } else {
         $insertNodes(nodes);
-      }
-    });
-  };
-
-  const handleHighlightClick = () => {
-    const newActiveState = !highlightActive;
-    setHighlightActive(newActiveState);
-
-    editor.update(() => {
-      const selection = $getSelection();
-      if ($isRangeSelection(selection)) {
-        $patchStyleText(selection, {
-          "background-color": newActiveState ? color : "none",
-        });
       }
     });
   };
@@ -98,16 +80,6 @@ export default function SidebarPlugin({ handleClick, show }: Props) {
         className="sidebar__item"
       >
         <span className="sidebar__icon icon__clock" />
-      </button>
-
-      <button
-        type="button"
-        aria-label="highlight selection"
-        title="highlight selection"
-        onClick={handleHighlightClick}
-        className={highlightActive ? "sidebar__item--active" : "sidebar__item"}
-      >
-        <span className="sidebar__icon icon__highlight" />
       </button>
 
       <button
