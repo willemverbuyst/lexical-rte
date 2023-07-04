@@ -2,4 +2,4 @@
 
 [live version](https://willemverbuyst.github.io/lexical-rte/)
 
-![](./public/screenshots/Screenshot.png)
+![](./screenshots/Screenshot.png)
