@@ -724,6 +724,20 @@ export default function ToolbarPlugin() {
     setShowFontColorPicker(false);
   };
 
+  const handleBgColorSelect = () => {
+    if (showFontColorPicker) {
+      setShowFontColorPicker(false);
+    }
+    setShowBackgroundColorPicker((prev) => !prev);
+  };
+
+  const handleFontColorSelect = () => {
+    if (showBackgroundColorPicker) {
+      setShowBackgroundColorPicker(false);
+    }
+    setShowFontColorPicker((prev) => !prev);
+  };
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -871,9 +885,7 @@ export default function ToolbarPlugin() {
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
           <button
             type="button"
-            onClick={() => {
-              setShowBackgroundColorPicker(!showBackgroundColorPicker);
-            }}
+            onClick={handleBgColorSelect}
             className={
               showBackgroundColorPicker
                 ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
@@ -896,9 +908,7 @@ export default function ToolbarPlugin() {
             )}
           <button
             type="button"
-            onClick={() => {
-              setShowFontColorPicker(!showFontColorPicker);
-            }}
+            onClick={handleFontColorSelect}
             className={
               showFontColorPicker
                 ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
