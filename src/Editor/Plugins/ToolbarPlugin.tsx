@@ -72,6 +72,24 @@ const blockTypeToBlockName = {
   ul: "Bulleted List",
 } as const;
 
+const backgroundColors = {
+  "#fdff00": false,
+  "#ff9a00": false,
+  "#00ff04": false,
+  "#00c5ff": false,
+  "#ff00a7": false,
+  transparent: true,
+};
+
+const fontColors = {
+  "#fff": false,
+  "#000": false,
+  "#0000ff": false,
+  "#ff0000": false,
+  "#00ff00": false,
+  "#aaa": true,
+};
+
 function getSelectedNode(selection: RangeSelection) {
   const { anchor } = selection;
   const { focus } = selection;
@@ -461,10 +479,14 @@ function ColorPicker({
   onChange,
   toolbarRef,
   close,
+  colorMap,
+  type,
 }: {
   onChange: (color: string) => void;
   toolbarRef: React.MutableRefObject<HTMLDivElement | null>;
   close: () => void;
+  colorMap: Record<string, boolean>;
+  type: "Font" | "Background";
 }) {
   const colorPickerRef = useRef<HTMLDivElement | null>(null);
 
@@ -479,14 +501,7 @@ function ColorPicker({
     }
   }, [colorPickerRef, toolbarRef]);
 
-  const [colors, setColors] = useState({
-    "#cd9323": false,
-    "#1a53d8": false,
-    "#9a2151": false,
-    "#0d6416": false,
-    "#8d2808": false,
-    transparent: true,
-  });
+  const [colors, setColors] = useState(colorMap);
 
   const handleSelectColor = (color: keyof typeof colors) => {
     (Object.keys(colors) as Array<keyof typeof colors>).forEach((k) => {
@@ -520,7 +535,9 @@ function ColorPicker({
         <button
           type="button"
           className="picker__action-btn"
-          onClick={() => handleSelectColor("transparent")}
+          onClick={() =>
+            handleSelectColor(type === "Background" ? "transparent" : "#aaa")
+          }
         >
           clear
         </button>
@@ -707,6 +724,20 @@ export default function ToolbarPlugin() {
     setShowFontColorPicker(false);
   };
 
+  const handleBgColorSelect = () => {
+    if (showFontColorPicker) {
+      setShowFontColorPicker(false);
+    }
+    setShowBackgroundColorPicker((prev) => !prev);
+  };
+
+  const handleFontColorSelect = () => {
+    if (showBackgroundColorPicker) {
+      setShowBackgroundColorPicker(false);
+    }
+    setShowFontColorPicker((prev) => !prev);
+  };
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -854,9 +885,7 @@ export default function ToolbarPlugin() {
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
           <button
             type="button"
-            onClick={() => {
-              setShowBackgroundColorPicker(!showBackgroundColorPicker);
-            }}
+            onClick={handleBgColorSelect}
             className={
               showBackgroundColorPicker
                 ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
@@ -872,14 +901,14 @@ export default function ToolbarPlugin() {
                 onChange={onBgColorSelect}
                 toolbarRef={toolbarRef}
                 close={closeBgColorSelect}
+                colorMap={backgroundColors}
+                type="Background"
               />,
               document.body
             )}
           <button
             type="button"
-            onClick={() => {
-              setShowFontColorPicker(!showFontColorPicker);
-            }}
+            onClick={handleFontColorSelect}
             className={
               showFontColorPicker
                 ? "toolbar-item toolbar-item__btn toolbar-item__btn--active"
@@ -895,6 +924,8 @@ export default function ToolbarPlugin() {
                 onChange={onFontColorSelect}
                 toolbarRef={toolbarRef}
                 close={closeFontColorSelect}
+                colorMap={fontColors}
+                type="Font"
               />,
               document.body
             )}
