@@ -251,8 +251,12 @@ function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
             type="button"
             className="link-editor__button"
             onClick={() => setEditMode(true)}
+            aria-labelledby="highlight-icon"
           >
-            <span className="link-editor__icon icon__highlight" />
+            <span
+              className="link-editor__icon icon__highlight"
+              id="highlight-icon"
+            />
           </button>
         </div>
       )}
