@@ -200,8 +200,8 @@ function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
           updateLinkEditor();
           return true;
         },
-        LowPriority
-      )
+        LowPriority,
+      ),
     );
   }, [editor, updateLinkEditor]);
 
@@ -557,7 +557,7 @@ export default function ToolbarPlugin() {
   const [blockType, setBlockType] =
     useState<keyof typeof blockTypeToBlockName>("paragraph");
   const [selectedElementKey, setSelectedElementKey] = useState<string | null>(
-    null
+    null,
   );
   const [showBlockOptionsDropDown, setShowBlockOptionsDropDown] =
     useState(false);
@@ -594,7 +594,7 @@ export default function ToolbarPlugin() {
           setBlockType(type);
         } else {
           const type = ($isHeadingNode(
-            element
+            element,
           ) as unknown as keyof typeof blockTypeToBlockName)
             ? element.getTag()
             : element.getType();
@@ -621,14 +621,14 @@ export default function ToolbarPlugin() {
       }
 
       setFontColor(
-        $getSelectionStyleValueForProperty(selection, "color", "#000")
+        $getSelectionStyleValueForProperty(selection, "color", "#000"),
       );
       setBgColor(
         $getSelectionStyleValueForProperty(
           selection,
           "background-color",
-          "transparent"
-        )
+          "transparent",
+        ),
       );
     }
   }, [editor]);
@@ -646,7 +646,7 @@ export default function ToolbarPlugin() {
           updateToolbar();
           return false;
         },
-        LowPriority
+        LowPriority,
       ),
       editor.registerCommand(
         CAN_UNDO_COMMAND,
@@ -654,7 +654,7 @@ export default function ToolbarPlugin() {
           setCanUndo(payload);
           return false;
         },
-        LowPriority
+        LowPriority,
       ),
       editor.registerCommand(
         CAN_REDO_COMMAND,
@@ -662,8 +662,8 @@ export default function ToolbarPlugin() {
           setCanRedo(payload);
           return false;
         },
-        LowPriority
-      )
+        LowPriority,
+      ),
     );
   }, [editor, updateToolbar]);
 
@@ -679,7 +679,7 @@ export default function ToolbarPlugin() {
         }
       });
     },
-    [editor, selectedElementKey]
+    [editor, selectedElementKey],
   );
 
   const insertLink = useCallback(() => {
@@ -699,21 +699,21 @@ export default function ToolbarPlugin() {
         }
       });
     },
-    [editor]
+    [editor],
   );
 
   const onFontColorSelect = useCallback(
     (value: string) => {
       applyStyleText({ color: value });
     },
-    [applyStyleText]
+    [applyStyleText],
   );
 
   const onBgColorSelect = useCallback(
     (value: string) => {
       applyStyleText({ "background-color": value });
     },
-    [applyStyleText]
+    [applyStyleText],
   );
 
   const closeBgColorSelect = () => {
@@ -785,7 +785,7 @@ export default function ToolbarPlugin() {
             toolbarRef={toolbarRef}
             setShowBlockOptionsDropDown={setShowBlockOptionsDropDown}
           />,
-          document.body
+          document.body,
         )}
 
       {blockType === "code" ? (
@@ -904,7 +904,7 @@ export default function ToolbarPlugin() {
                 colorMap={backgroundColors}
                 type="Background"
               />,
-              document.body
+              document.body,
             )}
           <button
             type="button"
@@ -927,7 +927,7 @@ export default function ToolbarPlugin() {
                 colorMap={fontColors}
                 type="Font"
               />,
-              document.body
+              document.body,
             )}
           <button
             type="button"
