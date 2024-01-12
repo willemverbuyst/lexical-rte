@@ -8,8 +8,9 @@ function App() {
           href="https://github.com/willemverbuyst/lexical-rte"
           target="_blank"
           rel="noreferrer"
+          aria-labelledby="gh-icon"
         >
-          <span className="link__icon icon__github" />
+          <span className="link__icon icon__github" id="gh-icon" />
         </a>
       </div>
       <h1 className="gradient-text">lexical rte</h1>

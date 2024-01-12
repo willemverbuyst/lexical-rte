@@ -18,7 +18,11 @@ body {
   box-sizing: border-box;
   text-align: center;
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular",
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    ".SFNSText-Regular",
     sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
@@ -128,7 +132,8 @@ select {
   padding: 0 1rem;
   border: 2px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: inset 4px 4px 4px var(--bg-color-dark),
+  box-shadow:
+    inset 4px 4px 4px var(--bg-color-dark),
     inset -4px -4px 4px var(--bg-color-light);
   outline: none;
   grid-area: editor;
@@ -286,19 +291,22 @@ select {
 .sidebar-item__btn {
   width: 3rem;
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
 .toolbar-item__btn:active,
 .sidebar-item__btn:active {
-  box-shadow: -1px -1px 1px var(--bg-color-dark),
+  box-shadow:
+    -1px -1px 1px var(--bg-color-dark),
     1px 1px 1px var(--bg-color-light);
 }
 
 .sidebar-item__btn--active,
 .toolbar-item__btn--active {
-  box-shadow: -2px -2px 2px var(--bg-color-dark),
+  box-shadow:
+    -2px -2px 2px var(--bg-color-dark),
     2px 2px 2px var(--bg-color-light);
 }
 
@@ -308,7 +316,8 @@ select {
   display: flex;
   align-items: center;
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -337,7 +346,8 @@ select {
   color: var(--txt-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -355,7 +365,8 @@ select {
   min-width: 13.5rem;
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: inset 1px 1px 1px var(--bg-color-light),
+  box-shadow:
+    inset 1px 1px 1px var(--bg-color-light),
     inset -1px -1px 1px var(--bg-color-dark);
 }
 
@@ -398,7 +409,8 @@ select {
 .toolbar-item__select {
   padding: 0 1rem;
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
   position: relative;
 }
@@ -419,7 +431,8 @@ select {
 }
 
 .toolbar-item__btn-group:active {
-  box-shadow: -1px -1px 1px var(--bg-color-dark),
+  box-shadow:
+    -1px -1px 1px var(--bg-color-dark),
     1px 1px 1px var(--bg-color-light);
 }
 
@@ -427,7 +440,8 @@ select {
   margin: 0.3rem;
   margin-right: 0;
   border-radius: 7px 0 0 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -435,7 +449,8 @@ select {
   margin: 0.3rem 0;
   border: 1px solid var(--bg-color);
   border-radius: 0 0 0 0;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -444,14 +459,16 @@ select {
   margin-left: 0;
   border: 1px solid var(--bg-color);
   border-radius: 0 7px 7px 0;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
 .toolbar-item__btn-group-left--active,
 .toolbar-item__btn-group-middle--active,
 .toolbar-item__btn-group-right--active {
-  box-shadow: -2px -2px 2px var(--bg-color-dark),
+  box-shadow:
+    -2px -2px 2px var(--bg-color-dark),
     2px 2px 2px var(--bg-color-light);
 }
 
@@ -473,7 +490,8 @@ select {
   background-color: var(--bg-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -491,7 +509,8 @@ select {
   background-color: var(--bg-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: -2px -2px 2px var(--bg-color-dark),
+  box-shadow:
+    -2px -2px 2px var(--bg-color-dark),
     2px 2px 2px var(--bg-color-light);
   outline: none;
 }
@@ -536,7 +555,8 @@ select {
   color: var(--txt-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -574,7 +594,8 @@ select {
   color: var(--txt-color);
   border: 1px solid var(--bg-color);
   border-radius: 4px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
@@ -694,7 +715,8 @@ select {
   color: var(--txt-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: 1px 1px 1px var(--bg-color-dark),
+  box-shadow:
+    1px 1px 1px var(--bg-color-dark),
     -1px -1px 1px var(--bg-color-light);
 }
 
@@ -713,20 +735,23 @@ select {
   color: var(--txt-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
 
 .debug-tree-button:hover,
 .debug-timetravel-button:hover .debug-timetravel-panel-button:hover {
-  box-shadow: 1px 1px 1px var(--bg-color-dark),
+  box-shadow:
+    1px 1px 1px var(--bg-color-dark),
     -1px -1px 1px var(--bg-color-light);
 }
 
 .debug-tree-button:active,
 .debug-tree-button:active,
 .debug-timetravel-panel-button:active {
-  box-shadow: -1px -1px 1px var(--bg-color-dark),
+  box-shadow:
+    -1px -1px 1px var(--bg-color-dark),
     1px 1px 1px var(--bg-color-light);
 }
 
@@ -741,7 +766,8 @@ select {
   color: var(--txt-color);
   border: 1px solid var(--bg-color);
   border-radius: 7px;
-  box-shadow: -2px -2px 2px var(--bg-color-dark),
+  box-shadow:
+    -2px -2px 2px var(--bg-color-dark),
     2px 2px 2px var(--bg-color-light);
 }
 
@@ -755,6 +781,7 @@ select {
   border: 1px solid var(--bg-color);
   border-radius: 7px;
   cursor: pointer;
-  box-shadow: 2px 2px 2px var(--bg-color-dark),
+  box-shadow:
+    2px 2px 2px var(--bg-color-dark),
     -2px -2px 2px var(--bg-color-light);
 }
